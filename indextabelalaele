@@ -1,0 +1,1067 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Tabela Periódica Interativa (Copy)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: dark;
+    --bg: #0F1B24;
+    --bg-deep: #0A141B;
+    --panel: #172530;
+    --panel-2: #1D2E3A;
+    --line: #2B3E4A;
+    --chalk: #EEEDE4;
+    --chalk-dim: #B9C4C9;
+    --gold: #E7B450;
+    --cyan: #6BD8C6;
+    --coral: #E96A52;
+
+    --c-alcalino: #E8654D;
+    --c-alcalino2: #F0A24E;
+    --c-transicao: #5B9AD6;
+    --c-pos: #78B679;
+    --c-metaloide: #C79BE0;
+    --c-naometal: #5FD1C0;
+    --c-halogenio: #ECC050;
+    --c-gasnobre: #9AA7AC;
+    --c-lantanideo: #EF93B4;
+    --c-actinideo: #A98CD8;
+
+    --cell: 54px;
+    --radius: 3px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:
+      radial-gradient(1200px 700px at 15% -10%, #142430 0%, transparent 60%),
+      radial-gradient(1000px 600px at 100% 0%, #14232c 0%, transparent 55%),
+      var(--bg);
+    color:var(--chalk);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+  }
+
+  ::selection{ background:var(--gold); color:#1a1200; }
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    color:var(--chalk);
+    margin:0;
+  }
+
+  .wrap{ max-width:1180px; margin:0 auto; padding-left:max(28px, env(safe-area-inset-left, 0px)); padding-right:max(28px, env(safe-area-inset-right, 0px)); }
+
+  a{ color:var(--cyan); }
+
+  /* ---------- NAV ---------- */
+  nav.topnav{
+    position:sticky; top:env(safe-area-inset-top, 0px); z-index:50;
+    background:rgba(10,20,27,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.topnav .wrap{
+    display:flex; align-items:center; gap:26px;
+    height:58px; overflow-x:auto;
+  }
+  nav.topnav .brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:17px;
+    color:var(--gold); white-space:nowrap; flex-shrink:0;
+    display:flex; align-items:center; gap:8px;
+  }
+  nav.topnav .brand .z{
+    font-family:'IBM Plex Mono', monospace; font-size:11px;
+    border:1px solid var(--gold); border-radius:2px; padding:1px 5px;
+  }
+  nav.topnav .links{ display:flex; gap:22px; }
+  nav.topnav .links a{
+    color:var(--chalk-dim); text-decoration:none; font-size:14px; font-weight:500;
+    white-space:nowrap; transition:color .15s;
+  }
+  nav.topnav .links a:hover{ color:var(--chalk); }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding:86px 0 70px;
+    position:relative;
+    overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  header.hero .tile{
+    position:absolute;
+    right:-40px; top:-60px;
+    width:340px; height:340px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    opacity:0.5;
+    display:flex; flex-direction:column; justify-content:space-between;
+    padding:26px;
+    background:linear-gradient(160deg, rgba(107,216,198,0.06), transparent 60%);
+    pointer-events:none;
+  }
+  header.hero .tile .zn{ font-family:'IBM Plex Mono',monospace; font-size:22px; color:var(--cyan); }
+  header.hero .tile .sym{ font-family:'Fraunces',serif; font-size:150px; font-weight:600; color:rgba(238,237,228,0.12); line-height:1; }
+  header.hero .tile .nm{ font-family:'IBM Plex Mono',monospace; font-size:14px; color:var(--chalk-dim); }
+
+  header.hero .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; color:var(--cyan);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:22px;
+  }
+  header.hero .eyebrow::before{
+    content:''; width:26px; height:1px; background:var(--cyan);
+  }
+  header.hero h1{
+    font-size:clamp(38px,5.4vw,64px);
+    max-width:820px;
+    line-height:1.05;
+  }
+  header.hero h1 em{ font-style:normal; color:var(--gold); }
+  header.hero p.lede{
+    max-width:640px; margin-top:22px;
+    font-size:clamp(16px,1.6vw,19px);
+    color:var(--chalk-dim);
+  }
+  header.hero .cta-row{ margin-top:34px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:14.5px;
+    padding:12px 22px; border-radius:3px; border:1px solid var(--line);
+    background:var(--panel); color:var(--chalk); cursor:pointer;
+    text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    transition: border-color .15s, transform .1s;
+  }
+  .btn:hover{ border-color:var(--gold); }
+  .btn.primary{ background:var(--gold); color:#1a1200; border-color:var(--gold); }
+  .btn.primary:hover{ transform:translateY(-1px); }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{ padding:74px 0; border-bottom:1px solid var(--line); }
+  section.tight{ padding:56px 0; }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--gold);
+    margin-bottom:14px; display:block;
+  }
+  section h2{ font-size:clamp(26px,3vw,36px); max-width:640px; }
+  section .lede{ color:var(--chalk-dim); max-width:640px; margin-top:14px; font-size:16px; }
+
+  .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:48px; margin-top:38px; }
+  @media (max-width:860px){ .grid-2{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:24px 26px;
+  }
+  .card h3{ font-size:19px; color:var(--gold); margin-bottom:10px; }
+  .card p{ color:var(--chalk-dim); font-size:15px; margin:0; }
+
+  /* ---------- NUMERO ATOMICO SECTION ---------- */
+  .diagram-atom{
+    display:flex; align-items:center; justify-content:center;
+    gap:0; margin-top:10px;
+  }
+  .z-box{
+    font-family:'IBM Plex Mono',monospace;
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+  }
+
+  .fact-list{ list-style:none; margin:22px 0 0; padding:0; display:grid; gap:14px; }
+  .fact-list li{
+    display:grid; grid-template-columns:120px 1fr; gap:18px;
+    border-top:1px solid var(--line); padding-top:14px; font-size:15px;
+  }
+  .fact-list li b{ color:var(--gold); font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:13.5px; }
+  .fact-list li span{ color:var(--chalk-dim); }
+
+  /* ---------- FAMILIES LEGEND / STRIP ---------- */
+  .family-strip{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:10px; margin-top:30px;
+  }
+  .family-chip{
+    display:flex; align-items:center; gap:12px;
+    background:var(--panel); border:1px solid var(--line); border-radius:3px;
+    padding:12px 14px; cursor:pointer; transition:border-color .15s, background .15s;
+  }
+  .family-chip:hover{ border-color:var(--chalk-dim); }
+  .family-chip.active{ border-color:var(--gold); background:var(--panel-2); }
+  .family-chip .dot{ width:14px; height:14px; border-radius:2px; flex-shrink:0; }
+  .family-chip .txt{ display:flex; flex-direction:column; }
+  .family-chip .txt b{ font-size:13.5px; }
+  .family-chip .txt span{ font-size:11.5px; color:var(--chalk-dim); font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- ELECTRONEGATIVITY VISUAL ---------- */
+  .en-scale{
+    margin-top:30px; height:34px; border-radius:3px;
+    background:linear-gradient(90deg,#243444 0%, #2c6e78 25%, #3fa08a 50%, #e7b450 75%, #e96a52 100%);
+    position:relative;
+  }
+  .en-scale .lbl{
+    position:absolute; top:42px; font-size:12px; color:var(--chalk-dim); font-family:'IBM Plex Mono',monospace;
+    transform:translateX(-50%);
+  }
+  .en-arrows{ display:flex; justify-content:space-between; margin-top:56px; font-size:13px; color:var(--chalk-dim); }
+  .en-arrows span{ display:flex; align-items:center; gap:8px; }
+
+  /* ---------- RADIUS COMPARISON ---------- */
+  .radius-compare{ display:flex; flex-wrap:wrap; gap:34px; margin-top:34px; align-items:flex-end; }
+  .radius-group{
+    background:var(--panel); border:1px solid var(--line); border-radius:4px;
+    padding:20px 24px; display:flex; flex-direction:column; gap:8px;
+  }
+  .radius-group .rg-title{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--gold); margin-bottom:6px; }
+  .radius-row{ display:flex; align-items:flex-end; gap:22px; }
+  .radius-item{ display:flex; flex-direction:column; align-items:center; gap:8px; }
+  .radius-item .rc{ border-radius:50%; background:var(--cyan); flex-shrink:0; }
+  .radius-item .rl{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--chalk-dim); text-align:center; }
+  .radius-item .rl b{ color:var(--chalk); display:block; font-size:13px; }
+
+  /* ---------- SHELLS EXPLANATION ---------- */
+  .shell-demo{ display:flex; gap:40px; align-items:center; flex-wrap:wrap; margin-top:30px; }
+  .shell-demo svg{ background:var(--panel); border:1px solid var(--line); border-radius:6px; }
+  .shell-legend{ display:grid; gap:10px; font-size:14.5px; color:var(--chalk-dim); }
+  .shell-legend b{ color:var(--chalk); font-family:'IBM Plex Mono',monospace; }
+
+  /* ---------- TABLE SECTION ---------- */
+  section#tabela{ padding-bottom:40px; }
+  .table-controls{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:16px; margin:30px 0 22px;
+  }
+  .mode-switch{ display:flex; gap:6px; background:var(--panel); border:1px solid var(--line); border-radius:4px; padding:4px; }
+  .mode-switch button{
+    font-family:'Inter',sans-serif; font-size:13.5px; font-weight:600;
+    padding:9px 16px; border-radius:3px; border:none; background:transparent;
+    color:var(--chalk-dim); cursor:pointer; transition:background .15s, color .15s;
+  }
+  .mode-switch button.active{ background:var(--gold); color:#1a1200; }
+  .zoom-controls{ display:flex; align-items:center; gap:8px; }
+  .zoom-controls button{
+    width:32px; height:32px; border-radius:3px; border:1px solid var(--line);
+    background:var(--panel); color:var(--chalk); font-size:16px; cursor:pointer;
+  }
+  .zoom-controls span{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--chalk-dim); width:44px; text-align:center; }
+
+  .table-scroll{ overflow-x:auto; padding-bottom:14px; }
+  #grid{
+    display:grid;
+    grid-template-columns:repeat(18, var(--cell));
+    grid-auto-rows:var(--cell);
+    gap:3px;
+    width:max-content;
+    margin:0 auto;
+  }
+  .cell{
+    position:relative;
+    border-radius:var(--radius);
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    cursor:pointer;
+    color:#0e1216;
+    border:1px solid rgba(0,0,0,0.25);
+    transition: transform .1s, box-shadow .1s, outline .1s;
+    user-select:none;
+  }
+  .cell:hover{ transform:scale(1.09); z-index:5; box-shadow:0 6px 18px rgba(0,0,0,0.45); }
+  .cell.selected{ outline:2.5px solid var(--cyan); outline-offset:1px; z-index:6; }
+  .cell .zc{ position:absolute; top:2px; left:4px; font-family:'IBM Plex Mono',monospace; font-size:9px; font-weight:600; opacity:0.75; }
+  .cell .symc{ font-family:'Fraunces',serif; font-weight:700; font-size:17px; line-height:1; }
+  .cell .valc{ position:absolute; bottom:2px; right:4px; font-family:'IBM Plex Mono',monospace; font-size:8px; font-weight:700; opacity:0.85; }
+  .cell.spacer{ background:none; border:none; cursor:default; }
+  .cell.spacer:hover{ transform:none; box-shadow:none; }
+  .cell.ghost{ background:var(--panel-2); color:var(--chalk-dim); border-style:dashed; font-family:'IBM Plex Mono',monospace; font-size:10px; }
+  .cell.nodata{ background:repeating-linear-gradient(45deg, #26343e, #26343e 5px, #1c2830 5px, #1c2830 10px); color:var(--chalk-dim); }
+
+  .table-legend{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--chalk-dim);
+  }
+  .table-legend span{ display:flex; align-items:center; gap:6px; }
+  .table-legend i{ width:11px; height:11px; border-radius:2px; display:inline-block; }
+
+  .table-hint{ text-align:center; margin-top:16px; font-size:13.5px; color:var(--chalk-dim); }
+
+  /* ---------- DETAIL PANEL ---------- */
+  #overlay{
+    position:fixed; inset:0; background:rgba(6,12,16,0.7); backdrop-filter:blur(2px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:20px;
+  }
+  #overlay.show{ display:flex; }
+  #detail{
+    width:100%; max-width:760px; max-height:88vh; overflow-y:auto;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:36px 40px;
+  }
+  #detail .dclose{
+    float:right; background:none; border:1px solid var(--line); color:var(--chalk-dim);
+    width:34px; height:34px; border-radius:3px; cursor:pointer; font-size:16px;
+  }
+  #detail .dhead{ display:flex; gap:26px; align-items:center; }
+  #detail .dsym{
+    font-family:'Fraunces',serif; font-weight:700; font-size:72px;
+    width:120px; height:120px; border-radius:6px; display:flex; align-items:center; justify-content:center;
+    color:#0e1216; flex-shrink:0;
+  }
+  #detail .dname{ font-family:'Fraunces',serif; font-size:28px; }
+  #detail .dcat{ font-family:'IBM Plex Mono',monospace; font-size:13px; color:var(--gold); margin-top:6px; }
+  #detail .dgrid{
+    margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:14px 28px;
+  }
+  #detail .dstat{ border-top:1px solid var(--line); padding-top:10px; }
+  #detail .dstat b{ display:block; font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--chalk-dim); font-weight:500; margin-bottom:4px; }
+  #detail .dstat span{ font-size:16.5px; }
+  #detail .dconfig{
+    margin-top:22px; padding:14px 16px; background:var(--bg-deep); border-radius:4px;
+    font-family:'IBM Plex Mono',monospace; font-size:13.5px; color:var(--cyan); word-break:break-word;
+  }
+  #detail .dbohr{ margin-top:24px; display:flex; gap:26px; align-items:center; flex-wrap:wrap; }
+  #detail .dbohr .note{ font-size:13.5px; color:var(--chalk-dim); max-width:280px; }
+  #detail .dbohr .note b{ color:var(--chalk); }
+
+  /* ---------- GLOSSARY / RECAP ---------- */
+  .recap-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:20px 40px; margin-top:32px; }
+  @media (max-width:760px){ .recap-grid{ grid-template-columns:1fr; } }
+  .recap-item{ border-top:1px solid var(--line); padding-top:16px; }
+  .recap-item b{ color:var(--gold); font-family:'Fraunces',serif; font-size:17px; display:block; margin-bottom:6px; }
+  .recap-item p{ margin:0; color:var(--chalk-dim); font-size:14.5px; }
+
+  footer{ padding:34px 0 60px; text-align:center; color:var(--chalk-dim); font-size:13px; }
+
+  /* projector mode: scale up everything */
+  body.projector{ font-size:19px; }
+  body.projector h2{ font-size:clamp(32px,3.6vw,44px) !important; }
+  body.projector .lede{ font-size:18px !important; }
+  body.projector .card p, body.projector .fact-list li, body.projector .recap-item p{ font-size:17px !important; }
+  body.projector :root{ --cell:60px; }
+
+  @media (max-width:640px){
+    header.hero .tile{ display:none; }
+    .table-controls{ flex-direction:column; align-items:flex-start; }
+    #detail{ padding:26px 22px; }
+    #detail .dgrid{ grid-template-columns:1fr; }
+  }
+
+  body::before{ content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top, 0px); z-index:60; background:#0A141B; }
+  [data-scroll]{ cursor:pointer; }
+  [data-scroll]:focus-visible, .btn:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+  .cell{ -webkit-tap-highlight-color:transparent; }
+  @media (prefers-reduced-motion: reduce){ html{ scroll-behavior:auto; } .cell, .btn{ transition:none; } }
+
+  /* ---------- SABER MAIS (história e aplicações) ---------- */
+  .learn{ margin-top:24px; border-top:1px solid var(--line); padding-top:18px; }
+  .learn-head{ display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-bottom:12px; }
+  .learn-title{ font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--gold); }
+  .learn-badge{ font-size:11.5px; color:var(--cyan); border:1px solid var(--line); border-radius:3px; padding:2px 8px; }
+  .learn-edit, .learn-btn, .learn-tab{
+    font-family:'Inter',sans-serif; font-weight:600; font-size:13px; padding:8px 14px; border-radius:3px;
+    border:1px solid var(--line); background:var(--panel-2); color:var(--chalk); cursor:pointer;
+  }
+  .learn-edit{ margin-left:auto; }
+  .learn-edit:hover, .learn-btn:hover, .learn-tab:hover{ border-color:var(--chalk-dim); }
+  .learn-tabs{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:14px; }
+  .learn-tab.on, .learn-btn.primary{ background:var(--gold); color:#1a1200; border-color:var(--gold); }
+  .learn-text{ margin:0; font-size:15.5px; line-height:1.65; color:var(--chalk); max-width:62ch; }
+  .learn-empty{ margin:0; font-size:14px; color:var(--chalk-dim); }
+  .learn-lab{ display:block; margin:12px 0 4px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--chalk-dim); }
+  .learn-ta{
+    width:100%; background:var(--bg-deep); color:var(--chalk); border:1px solid var(--line); border-radius:3px;
+    padding:10px 12px; font-family:'Inter',sans-serif; font-size:14.5px; line-height:1.5; resize:vertical;
+  }
+  .learn-ta:focus-visible, .learn-edit:focus-visible, .learn-btn:focus-visible, .learn-tab:focus-visible{ outline:2px solid var(--cyan); outline-offset:2px; }
+  .learn-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:14px; }
+  .learn-btn:disabled{ opacity:.55; cursor:default; }
+  .learn-msg{ font-size:13px; color:var(--chalk-dim); }
+  body.projector .learn-text{ font-size:19px; }
+</style>
+
+
+<nav class="topnav">
+  <div class="wrap">
+    <div class="brand"><span class="z">Z</span> Tabela Periódica</div>
+    <div class="links">
+      <a role="button" tabindex="0" data-scroll="intro">Introdução</a>
+      <a role="button" tabindex="0" data-scroll="numero-atomico">Número atômico</a>
+      <a role="button" tabindex="0" data-scroll="periodos-familias">Períodos e famílias</a>
+      <a role="button" tabindex="0" data-scroll="camadas">Camada de valência</a>
+      <a role="button" tabindex="0" data-scroll="eletronegatividade">Eletronegatividade</a>
+      <a role="button" tabindex="0" data-scroll="raio-atomico">Raio atômico</a>
+      <a role="button" tabindex="0" data-scroll="tabela">Tabela interativa</a>
+      <a role="button" tabindex="0" data-scroll="recap">Resumo</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="intro">
+  <div class="tile">
+    <div class="zn">8</div>
+    <div class="sym">O</div>
+    <div class="nm">OXIGÊNIO</div>
+  </div>
+  <div class="wrap">
+    <span class="eyebrow">AULA INTERATIVA · QUÍMICA</span>
+    <h1>Todo elemento tem um <em>endereço</em> — e esse endereço explica seu comportamento.</h1>
+    <p class="lede">Nesta aula vamos explorar a tabela periódica não como uma lista para decorar, mas como um mapa: a posição de cada elemento revela seu número atômico, sua família, quantos elétrons ele tem na camada mais externa e o quanto ele "disputa" elétrons em uma ligação.</p>
+    <div class="cta-row">
+      <a role="button" tabindex="0" class="btn primary" data-scroll="tabela">Ir direto para a tabela ↓</a>
+      <button class="btn" id="btnProjector">Ativar modo projetor</button>
+    </div>
+  </div>
+</header>
+
+<section id="numero-atomico">
+  <div class="wrap">
+    <span class="kicker">01 — A IDENTIDADE DO ELEMENTO</span>
+    <h2>Número atômico: o que realmente define um elemento</h2>
+    <p class="lede">O número atômico (Z) é a quantidade de prótons no núcleo de um átomo. Ele é único para cada elemento — é por isso que a tabela está organizada em ordem crescente de Z, e não por massa ou por ordem alfabética.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Por que Z organiza tudo</h3>
+        <p>Mudou o número de prótons, mudou o elemento. Um átomo com 6 prótons é sempre carbono; com 8 prótons, sempre oxigênio. Elétrons podem ser ganhos ou perdidos (formando íons) e nêutrons podem variar (formando isótopos), mas o número de prótons não muda sem transformar o átomo em outro elemento.</p>
+      </div>
+      <div class="card">
+        <h3>Número atômico × massa atômica</h3>
+        <p>A massa atômica (o número com casas decimais, geralmente abaixo do símbolo) é a média ponderada das massas dos isótopos naturais do elemento. Já o número atômico é sempre um número inteiro e é ele quem define a posição do elemento na tabela.</p>
+      </div>
+    </div>
+
+    <ul class="fact-list">
+      <li><b>Z pequeno</b><span>Elementos leves, com poucos elétrons, ficam nos primeiros períodos (linhas) da tabela — ex.: hidrogênio (Z=1), hélio (Z=2).</span></li>
+      <li><b>Z grande</b><span>Elementos com muitos prótons e elétrons, geralmente instáveis ou radioativos, aparecem nos últimos períodos — muitos são sintéticos, criados em laboratório.</span></li>
+      <li><b>Átomo neutro</b><span>Em um átomo neutro, o número de elétrons é igual ao número de prótons (igual a Z). Isso é o que usamos para "distribuir" os elétrons nas camadas.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="periodos-familias">
+  <div class="wrap">
+    <span class="kicker">02 — LINHAS E COLUNAS</span>
+    <h2>Períodos e famílias (grupos)</h2>
+    <p class="lede">As <b>linhas horizontais</b> são chamadas de <b>períodos</b> — indicam quantas camadas eletrônicas o átomo possui. As <b>colunas verticais</b> são chamadas de <b>grupos</b> ou <b>famílias</b> — elementos da mesma família compartilham propriedades químicas parecidas porque têm o mesmo número de elétrons na camada de valência.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Período (linha)</h3>
+        <p>A tabela tem 7 períodos. Todo elemento do período 3, por exemplo, tem elétrons distribuídos em 3 camadas. Ao descer um período, o átomo ganha uma camada eletrônica inteira — e fica maior.</p>
+      </div>
+      <div class="card">
+        <h3>Família (coluna)</h3>
+        <p>Cada família tem um comportamento químico característico — os metais alcalinos, por exemplo, reagem violentamente com água, enquanto os gases nobres praticamente não reagem com nada. Clique nas famílias abaixo para destacá-las na tabela mais adiante.</p>
+      </div>
+    </div>
+
+    <div class="family-strip" id="familyStrip"></div>
+  </div>
+</section>
+
+<section id="camadas">
+  <div class="wrap">
+    <span class="kicker">03 — ONDE ACONTECE A QUÍMICA</span>
+    <h2>Distribuição eletrônica e camada de valência</h2>
+    <p class="lede">Os elétrons de um átomo se organizam em camadas (K, L, M, N, O, P, Q), cada uma com uma capacidade máxima. A <b>camada de valência</b> é a camada mais externa — é ela que participa das ligações químicas, porque está mais longe do núcleo e mais "disponível" para interagir com outros átomos.</p>
+
+    <div class="shell-demo">
+      <svg id="shellDemoSvg" width="260" height="260" viewBox="0 0 260 260"></svg>
+      <div class="shell-legend">
+        <div><b>Exemplo: sódio (Z=11)</b></div>
+        <div>Distribuição: <b>2 – 8 – 1</b></div>
+        <div>Camada K: 2 elétrons (cheia)</div>
+        <div>Camada L: 8 elétrons (cheia)</div>
+        <div>Camada M (valência): <b style="color:var(--gold)">1 elétron</b></div>
+        <div style="margin-top:6px; max-width:280px;">É esse único elétron da camada M que o sódio tende a perder ao reagir — por isso ele forma o íon Na⁺.</div>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:30px;">Na tabela interativa mais abaixo, escolha o modo <b>"Camada de valência"</b> para ver, elemento por elemento, quantos elétrons cada um tem na última camada — e clique em qualquer elemento para ver o diagrama completo de camadas dele.</p>
+  </div>
+</section>
+
+<section id="eletronegatividade">
+  <div class="wrap">
+    <span class="kicker">04 — A "DISPUTA" PELOS ELÉTRONS</span>
+    <h2>Eletronegatividade</h2>
+    <p class="lede">Eletronegatividade mede a força com que um átomo atrai os elétrons de uma ligação química para perto de si. Quanto maior o valor (escala de Pauling), mais "ganancioso" o átomo é por elétrons.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Tendência na tabela</h3>
+        <p>A eletronegatividade cresce da esquerda para a direita em um período (mais prótons puxando os elétrons) e de baixo para cima em uma família (menos camadas afastando o elétron externo do núcleo). O flúor é o elemento mais eletronegativo de todos.</p>
+      </div>
+      <div class="card">
+        <h3>Por que os gases nobres ficam de fora</h3>
+        <p>Gases nobres já têm a camada de valência completa e praticamente não formam ligações — por isso, na maioria das tabelas, eles aparecem sem valor de eletronegatividade definido.</p>
+      </div>
+    </div>
+
+    <div class="en-scale">
+      <div class="lbl" style="left:5%;">baixa</div>
+      <div class="lbl" style="left:50%;">média</div>
+      <div class="lbl" style="left:95%;">alta (F ≈ 3,98)</div>
+    </div>
+    <div class="en-arrows">
+      <span>↑ aumenta ao subir na família</span>
+      <span>aumenta da esquerda para a direita →</span>
+    </div>
+  </div>
+</section>
+
+<section id="raio-atomico">
+  <div class="wrap">
+    <span class="kicker">05 — O TAMANHO DO ÁTOMO</span>
+    <h2>Raio atômico</h2>
+    <p class="lede">Raio atômico é, em termos simples, o "tamanho" do átomo — a distância média do núcleo até a região onde estão os elétrons da camada de valência. Ele depende de dois efeitos que competem entre si: o número de camadas eletrônicas e a força de atração do núcleo sobre essas camadas.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Descendo em uma família ↓</h3>
+        <p>O raio aumenta. Cada período novo acrescenta uma camada eletrônica inteira, afastando os elétrons de valência do núcleo — por isso o frâncio (Fr) é um átomo muito maior que o lítio (Li), mesmo estando na mesma família.</p>
+      </div>
+      <div class="card">
+        <h3>Da esquerda para a direita em um período →</h3>
+        <p>O raio diminui. O número de camadas continua o mesmo, mas o número de prótons no núcleo aumenta — essa carga extra puxa os elétrons com mais força para perto do núcleo, "encolhendo" o átomo.</p>
+      </div>
+    </div>
+
+    <div class="radius-compare" id="radiusCompare"></div>
+    <p class="table-hint" style="margin-top:14px;">Comparação em escala real entre raios covalentes (em pm): note como o raio cresce descendo a família 1 (alcalinos) e encolhe ao longo do período 2.</p>
+  </div>
+</section>
+
+<section id="tabela" class="tight">
+  <div class="wrap">
+    <span class="kicker">06 — MÃOS À OBRA</span>
+    <h2>A tabela periódica interativa</h2>
+    <p class="lede">Troque o modo de visualização, use o zoom para projetar na sala, e clique em qualquer elemento para abrir a ficha completa — com número atômico, massa, família, eletronegatividade, distribuição eletrônica e diagrama de camadas.</p>
+
+    <div class="table-controls">
+      <div class="mode-switch" id="modeSwitch">
+        <button data-mode="familia" class="active">Famílias</button>
+        <button data-mode="eletronegatividade">Eletronegatividade</button>
+        <button data-mode="raio">Raio atômico</button>
+        <button data-mode="valencia">Camada de valência</button>
+      </div>
+      <div class="zoom-controls">
+        <button id="zoomOut">–</button>
+        <span id="zoomLabel">54px</span>
+        <button id="zoomIn">+</button>
+      </div>
+    </div>
+
+    <div class="table-scroll">
+      <div id="grid"></div>
+    </div>
+
+    <div class="table-legend" id="tableLegend"></div>
+    <p class="table-hint">Clique em qualquer célula para abrir a ficha do elemento.</p>
+  </div>
+</section>
+
+<section id="recap">
+  <div class="wrap">
+    <span class="kicker">07 — PARA FIXAR</span>
+    <h2>Resumo da aula</h2>
+    <div class="recap-grid">
+      <div class="recap-item"><b>Número atômico (Z)</b><p>Número de prótons no núcleo. Define o elemento e sua posição na tabela.</p></div>
+      <div class="recap-item"><b>Período</b><p>Linha horizontal. Indica o número de camadas eletrônicas do átomo.</p></div>
+      <div class="recap-item"><b>Família (grupo)</b><p>Coluna vertical. Elementos com propriedades químicas semelhantes e mesmo número de elétrons de valência.</p></div>
+      <div class="recap-item"><b>Camada de valência</b><p>Última camada eletrônica. Determina como o átomo forma ligações químicas.</p></div>
+      <div class="recap-item"><b>Eletronegatividade</b><p>Capacidade de atrair elétrons em uma ligação. Cresce para a direita e para cima na tabela.</p></div>
+      <div class="recap-item"><b>Raio atômico</b><p>Tamanho do átomo. Cresce para baixo (mais camadas) e para a esquerda (menos prótons puxando os elétrons).</p></div>
+      <div class="recap-item"><b>Massa atômica</b><p>Média ponderada das massas dos isótopos naturais de um elemento — diferente do número atômico.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>Aula interativa sobre a Tabela Periódica — feita para uso em sala de aula e projeção.</footer>
+
+<div id="overlay">
+  <div id="detail"></div>
+</div>
+
+
+
+<script>
+// ---------- In-page scroll (avoids external-link confirmation in artifact sandbox) ----------
+document.querySelectorAll('[data-scroll]').forEach(link=>{
+  link.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); link.click(); } });
+  link.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const target = document.getElementById(link.dataset.scroll);
+    if(target){ target.scrollIntoView({behavior:'smooth', block:'start'}); }
+  });
+});
+
+const ELEMENTS = [{"z": 1, "sym": "H", "name": "Hidrogênio", "cat": "nao-metal", "period": 1, "group": 1, "mass": 1.008, "en": 2.2, "val": "1", "config": "1s¹", "shells": [1], "valence_count": 1, "valence_letter": "K", "radius": 31}, {"z": 2, "sym": "He", "name": "Hélio", "cat": "gas-nobre", "period": 1, "group": 18, "mass": 4.003, "en": null, "val": "2", "config": "1s²", "shells": [2], "valence_count": 2, "valence_letter": "K", "radius": 28}, {"z": 3, "sym": "Li", "name": "Lítio", "cat": "alcalino", "period": 2, "group": 1, "mass": 6.94, "en": 0.98, "val": "1", "config": "1s² 2s¹", "shells": [2, 1], "valence_count": 1, "valence_letter": "L", "radius": 128}, {"z": 4, "sym": "Be", "name": "Berílio", "cat": "alcalino-terroso", "period": 2, "group": 2, "mass": 9.012, "en": 1.57, "val": "2", "config": "1s² 2s²", "shells": [2, 2], "valence_count": 2, "valence_letter": "L", "radius": 96}, {"z": 5, "sym": "B", "name": "Boro", "cat": "metaloide", "period": 2, "group": 13, "mass": 10.81, "en": 2.04, "val": "3", "config": "1s² 2s² 2p¹", "shells": [2, 3], "valence_count": 3, "valence_letter": "L", "radius": 84}, {"z": 6, "sym": "C", "name": "Carbono", "cat": "nao-metal", "period": 2, "group": 14, "mass": 12.011, "en": 2.55, "val": "4", "config": "1s² 2s² 2p²", "shells": [2, 4], "valence_count": 4, "valence_letter": "L", "radius": 76}, {"z": 7, "sym": "N", "name": "Nitrogênio", "cat": "nao-metal", "period": 2, "group": 15, "mass": 14.007, "en": 3.04, "val": "5", "config": "1s² 2s² 2p³", "shells": [2, 5], "valence_count": 5, "valence_letter": "L", "radius": 71}, {"z": 8, "sym": "O", "name": "Oxigênio", "cat": "nao-metal", "period": 2, "group": 16, "mass": 15.999, "en": 3.44, "val": "6", "config": "1s² 2s² 2p⁴", "shells": [2, 6], "valence_count": 6, "valence_letter": "L", "radius": 66}, {"z": 9, "sym": "F", "name": "Flúor", "cat": "halogenio", "period": 2, "group": 17, "mass": 18.998, "en": 3.98, "val": "7", "config": "1s² 2s² 2p⁵", "shells": [2, 7], "valence_count": 7, "valence_letter": "L", "radius": 57}, {"z": 10, "sym": "Ne", "name": "Neônio", "cat": "gas-nobre", "period": 2, "group": 18, "mass": 20.18, "en": null, "val": "8", "config": "1s² 2s² 2p⁶", "shells": [2, 8], "valence_count": 8, "valence_letter": "L", "radius": 58}, {"z": 11, "sym": "Na", "name": "Sódio", "cat": "alcalino", "period": 3, "group": 1, "mass": 22.99, "en": 0.93, "val": "1", "config": "1s² 2s² 2p⁶ 3s¹", "shells": [2, 8, 1], "valence_count": 1, "valence_letter": "M", "radius": 166}, {"z": 12, "sym": "Mg", "name": "Magnésio", "cat": "alcalino-terroso", "period": 3, "group": 2, "mass": 24.305, "en": 1.31, "val": "2", "config": "1s² 2s² 2p⁶ 3s²", "shells": [2, 8, 2], "valence_count": 2, "valence_letter": "M", "radius": 141}, {"z": 13, "sym": "Al", "name": "Alumínio", "cat": "pos-transicao", "period": 3, "group": 13, "mass": 26.982, "en": 1.61, "val": "3", "config": "1s² 2s² 2p⁶ 3s² 3p¹", "shells": [2, 8, 3], "valence_count": 3, "valence_letter": "M", "radius": 121}, {"z": 14, "sym": "Si", "name": "Silício", "cat": "metaloide", "period": 3, "group": 14, "mass": 28.085, "en": 1.9, "val": "4", "config": "1s² 2s² 2p⁶ 3s² 3p²", "shells": [2, 8, 4], "valence_count": 4, "valence_letter": "M", "radius": 111}, {"z": 15, "sym": "P", "name": "Fósforo", "cat": "nao-metal", "period": 3, "group": 15, "mass": 30.974, "en": 2.19, "val": "5", "config": "1s² 2s² 2p⁶ 3s² 3p³", "shells": [2, 8, 5], "valence_count": 5, "valence_letter": "M", "radius": 107}, {"z": 16, "sym": "S", "name": "Enxofre", "cat": "nao-metal", "period": 3, "group": 16, "mass": 32.06, "en": 2.58, "val": "6", "config": "1s² 2s² 2p⁶ 3s² 3p⁴", "shells": [2, 8, 6], "valence_count": 6, "valence_letter": "M", "radius": 105}, {"z": 17, "sym": "Cl", "name": "Cloro", "cat": "halogenio", "period": 3, "group": 17, "mass": 35.45, "en": 3.16, "val": "7", "config": "1s² 2s² 2p⁶ 3s² 3p⁵", "shells": [2, 8, 7], "valence_count": 7, "valence_letter": "M", "radius": 102}, {"z": 18, "sym": "Ar", "name": "Argônio", "cat": "gas-nobre", "period": 3, "group": 18, "mass": 39.948, "en": null, "val": "8", "config": "1s² 2s² 2p⁶ 3s² 3p⁶", "shells": [2, 8, 8], "valence_count": 8, "valence_letter": "M", "radius": 106}, {"z": 19, "sym": "K", "name": "Potássio", "cat": "alcalino", "period": 4, "group": 1, "mass": 39.098, "en": 0.82, "val": "1", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹", "shells": [2, 8, 8, 1], "valence_count": 1, "valence_letter": "N", "radius": 203}, {"z": 20, "sym": "Ca", "name": "Cálcio", "cat": "alcalino-terroso", "period": 4, "group": 2, "mass": 40.078, "en": 1.0, "val": "2", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s²", "shells": [2, 8, 8, 2], "valence_count": 2, "valence_letter": "N", "radius": 176}, {"z": 21, "sym": "Sc", "name": "Escândio", "cat": "transicao", "period": 4, "group": 3, "mass": 44.956, "en": 1.36, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹", "shells": [2, 8, 9, 2], "valence_count": 2, "valence_letter": "N", "radius": 170}, {"z": 22, "sym": "Ti", "name": "Titânio", "cat": "transicao", "period": 4, "group": 4, "mass": 47.867, "en": 1.54, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d²", "shells": [2, 8, 10, 2], "valence_count": 2, "valence_letter": "N", "radius": 160}, {"z": 23, "sym": "V", "name": "Vanádio", "cat": "transicao", "period": 4, "group": 5, "mass": 50.942, "en": 1.63, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d³", "shells": [2, 8, 11, 2], "valence_count": 2, "valence_letter": "N", "radius": 153}, {"z": 24, "sym": "Cr", "name": "Crômio", "cat": "transicao", "period": 4, "group": 6, "mass": 51.996, "en": 1.66, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁴", "shells": [2, 8, 12, 2], "valence_count": 2, "valence_letter": "N", "radius": 139}, {"z": 25, "sym": "Mn", "name": "Manganês", "cat": "transicao", "period": 4, "group": 7, "mass": 54.938, "en": 1.55, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵", "shells": [2, 8, 13, 2], "valence_count": 2, "valence_letter": "N", "radius": 139}, {"z": 26, "sym": "Fe", "name": "Ferro", "cat": "transicao", "period": 4, "group": 8, "mass": 55.845, "en": 1.83, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶", "shells": [2, 8, 14, 2], "valence_count": 2, "valence_letter": "N", "radius": 132}, {"z": 27, "sym": "Co", "name": "Cobalto", "cat": "transicao", "period": 4, "group": 9, "mass": 58.933, "en": 1.88, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷", "shells": [2, 8, 15, 2], "valence_count": 2, "valence_letter": "N", "radius": 126}, {"z": 28, "sym": "Ni", "name": "Níquel", "cat": "transicao", "period": 4, "group": 10, "mass": 58.693, "en": 1.91, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁸", "shells": [2, 8, 16, 2], "valence_count": 2, "valence_letter": "N", "radius": 124}, {"z": 29, "sym": "Cu", "name": "Cobre", "cat": "transicao", "period": 4, "group": 11, "mass": 63.546, "en": 1.9, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁹", "shells": [2, 8, 17, 2], "valence_count": 2, "valence_letter": "N", "radius": 132}, {"z": 30, "sym": "Zn", "name": "Zinco", "cat": "transicao", "period": 4, "group": 12, "mass": 65.38, "en": 1.65, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰", "shells": [2, 8, 18, 2], "valence_count": 2, "valence_letter": "N", "radius": 122}, {"z": 31, "sym": "Ga", "name": "Gálio", "cat": "pos-transicao", "period": 4, "group": 13, "mass": 69.723, "en": 1.81, "val": "3", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p¹", "shells": [2, 8, 18, 3], "valence_count": 3, "valence_letter": "N", "radius": 122}, {"z": 32, "sym": "Ge", "name": "Germânio", "cat": "metaloide", "period": 4, "group": 14, "mass": 72.63, "en": 2.01, "val": "4", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p²", "shells": [2, 8, 18, 4], "valence_count": 4, "valence_letter": "N", "radius": 120}, {"z": 33, "sym": "As", "name": "Arsênio", "cat": "metaloide", "period": 4, "group": 15, "mass": 74.922, "en": 2.18, "val": "5", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p³", "shells": [2, 8, 18, 5], "valence_count": 5, "valence_letter": "N", "radius": 119}, {"z": 34, "sym": "Se", "name": "Selênio", "cat": "nao-metal", "period": 4, "group": 16, "mass": 78.971, "en": 2.55, "val": "6", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁴", "shells": [2, 8, 18, 6], "valence_count": 6, "valence_letter": "N", "radius": 120}, {"z": 35, "sym": "Br", "name": "Bromo", "cat": "halogenio", "period": 4, "group": 17, "mass": 79.904, "en": 2.96, "val": "7", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁵", "shells": [2, 8, 18, 7], "valence_count": 7, "valence_letter": "N", "radius": 120}, {"z": 36, "sym": "Kr", "name": "Criptônio", "cat": "gas-nobre", "period": 4, "group": 18, "mass": 83.798, "en": 3.0, "val": "8", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶", "shells": [2, 8, 18, 8], "valence_count": 8, "valence_letter": "N", "radius": 116}, {"z": 37, "sym": "Rb", "name": "Rubídio", "cat": "alcalino", "period": 5, "group": 1, "mass": 85.468, "en": 0.82, "val": "1", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹", "shells": [2, 8, 18, 8, 1], "valence_count": 1, "valence_letter": "O", "radius": 220}, {"z": 38, "sym": "Sr", "name": "Estrôncio", "cat": "alcalino-terroso", "period": 5, "group": 2, "mass": 87.62, "en": 0.95, "val": "2", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s²", "shells": [2, 8, 18, 8, 2], "valence_count": 2, "valence_letter": "O", "radius": 195}, {"z": 39, "sym": "Y", "name": "Ítrio", "cat": "transicao", "period": 5, "group": 3, "mass": 88.906, "en": 1.22, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹", "shells": [2, 8, 18, 9, 2], "valence_count": 2, "valence_letter": "O", "radius": 190}, {"z": 40, "sym": "Zr", "name": "Zircônio", "cat": "transicao", "period": 5, "group": 4, "mass": 91.224, "en": 1.33, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d²", "shells": [2, 8, 18, 10, 2], "valence_count": 2, "valence_letter": "O", "radius": 175}, {"z": 41, "sym": "Nb", "name": "Nióbio", "cat": "transicao", "period": 5, "group": 5, "mass": 92.906, "en": 1.6, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d³", "shells": [2, 8, 18, 11, 2], "valence_count": 2, "valence_letter": "O", "radius": 164}, {"z": 42, "sym": "Mo", "name": "Molibdênio", "cat": "transicao", "period": 5, "group": 6, "mass": 95.95, "en": 2.16, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁴", "shells": [2, 8, 18, 12, 2], "valence_count": 2, "valence_letter": "O", "radius": 154}, {"z": 43, "sym": "Tc", "name": "Tecnécio", "cat": "transicao", "period": 5, "group": 7, "mass": 98, "en": 1.9, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁵", "shells": [2, 8, 18, 13, 2], "valence_count": 2, "valence_letter": "O", "radius": 147}, {"z": 44, "sym": "Ru", "name": "Rutênio", "cat": "transicao", "period": 5, "group": 8, "mass": 101.07, "en": 2.2, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁶", "shells": [2, 8, 18, 14, 2], "valence_count": 2, "valence_letter": "O", "radius": 146}, {"z": 45, "sym": "Rh", "name": "Ródio", "cat": "transicao", "period": 5, "group": 9, "mass": 102.906, "en": 2.28, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁷", "shells": [2, 8, 18, 15, 2], "valence_count": 2, "valence_letter": "O", "radius": 142}, {"z": 46, "sym": "Pd", "name": "Paládio", "cat": "transicao", "period": 5, "group": 10, "mass": 106.42, "en": 2.2, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁸", "shells": [2, 8, 18, 16, 2], "valence_count": 2, "valence_letter": "O", "radius": 139}, {"z": 47, "sym": "Ag", "name": "Prata", "cat": "transicao", "period": 5, "group": 11, "mass": 107.868, "en": 1.93, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁹", "shells": [2, 8, 18, 17, 2], "valence_count": 2, "valence_letter": "O", "radius": 145}, {"z": 48, "sym": "Cd", "name": "Cádmio", "cat": "transicao", "period": 5, "group": 12, "mass": 112.414, "en": 1.69, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰", "shells": [2, 8, 18, 18, 2], "valence_count": 2, "valence_letter": "O", "radius": 144}, {"z": 49, "sym": "In", "name": "Índio", "cat": "pos-transicao", "period": 5, "group": 13, "mass": 114.818, "en": 1.78, "val": "3", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p¹", "shells": [2, 8, 18, 18, 3], "valence_count": 3, "valence_letter": "O", "radius": 142}, {"z": 50, "sym": "Sn", "name": "Estanho", "cat": "pos-transicao", "period": 5, "group": 14, "mass": 118.71, "en": 1.96, "val": "4", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p²", "shells": [2, 8, 18, 18, 4], "valence_count": 4, "valence_letter": "O", "radius": 139}, {"z": 51, "sym": "Sb", "name": "Antimônio", "cat": "metaloide", "period": 5, "group": 15, "mass": 121.76, "en": 2.05, "val": "5", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p³", "shells": [2, 8, 18, 18, 5], "valence_count": 5, "valence_letter": "O", "radius": 139}, {"z": 52, "sym": "Te", "name": "Telúrio", "cat": "metaloide", "period": 5, "group": 16, "mass": 127.6, "en": 2.1, "val": "6", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁴", "shells": [2, 8, 18, 18, 6], "valence_count": 6, "valence_letter": "O", "radius": 138}, {"z": 53, "sym": "I", "name": "Iodo", "cat": "halogenio", "period": 5, "group": 17, "mass": 126.904, "en": 2.66, "val": "7", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁵", "shells": [2, 8, 18, 18, 7], "valence_count": 7, "valence_letter": "O", "radius": 139}, {"z": 54, "sym": "Xe", "name": "Xenônio", "cat": "gas-nobre", "period": 5, "group": 18, "mass": 131.293, "en": 2.6, "val": "8", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶", "shells": [2, 8, 18, 18, 8], "valence_count": 8, "valence_letter": "O", "radius": 140}, {"z": 55, "sym": "Cs", "name": "Césio", "cat": "alcalino", "period": 6, "group": 1, "mass": 132.905, "en": 0.79, "val": "1", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹", "shells": [2, 8, 18, 18, 8, 1], "valence_count": 1, "valence_letter": "P", "radius": 244}, {"z": 56, "sym": "Ba", "name": "Bário", "cat": "alcalino-terroso", "period": 6, "group": 2, "mass": 137.327, "en": 0.89, "val": "2", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s²", "shells": [2, 8, 18, 18, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 215}, {"z": 57, "sym": "La", "name": "Lantânio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 138.905, "en": 1.1, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹", "shells": [2, 8, 18, 19, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 207}, {"z": 58, "sym": "Ce", "name": "Cério", "cat": "lantanideo", "period": 6, "group": 0, "mass": 140.116, "en": 1.12, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f²", "shells": [2, 8, 18, 20, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 204}, {"z": 59, "sym": "Pr", "name": "Praseodímio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 140.908, "en": 1.13, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f³", "shells": [2, 8, 18, 21, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 203}, {"z": 60, "sym": "Nd", "name": "Neodímio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 144.242, "en": 1.14, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁴", "shells": [2, 8, 18, 22, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 201}, {"z": 61, "sym": "Pm", "name": "Promécio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 145, "en": 1.13, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁵", "shells": [2, 8, 18, 23, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 199}, {"z": 62, "sym": "Sm", "name": "Samário", "cat": "lantanideo", "period": 6, "group": 0, "mass": 150.36, "en": 1.17, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁶", "shells": [2, 8, 18, 24, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 198}, {"z": 63, "sym": "Eu", "name": "Európio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 151.964, "en": 1.2, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁷", "shells": [2, 8, 18, 25, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 198}, {"z": 64, "sym": "Gd", "name": "Gadolínio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 157.25, "en": 1.2, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁸", "shells": [2, 8, 18, 26, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 196}, {"z": 65, "sym": "Tb", "name": "Térbio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 158.925, "en": 1.1, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f⁹", "shells": [2, 8, 18, 27, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 194}, {"z": 66, "sym": "Dy", "name": "Disprósio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 162.5, "en": 1.22, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁰", "shells": [2, 8, 18, 28, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 192}, {"z": 67, "sym": "Ho", "name": "Hólmio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 164.93, "en": 1.23, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹¹", "shells": [2, 8, 18, 29, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 192}, {"z": 68, "sym": "Er", "name": "Érbio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 167.259, "en": 1.24, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹²", "shells": [2, 8, 18, 30, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 189}, {"z": 69, "sym": "Tm", "name": "Túlio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 168.934, "en": 1.25, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹³", "shells": [2, 8, 18, 31, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 190}, {"z": 70, "sym": "Yb", "name": "Itérbio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 173.045, "en": 1.1, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴", "shells": [2, 8, 18, 32, 8, 2], "valence_count": 2, "valence_letter": "P", "radius": 187}, {"z": 71, "sym": "Lu", "name": "Lutécio", "cat": "lantanideo", "period": 6, "group": 0, "mass": 174.967, "en": 1.27, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹", "shells": [2, 8, 18, 32, 9, 2], "valence_count": 2, "valence_letter": "P", "radius": 187}, {"z": 72, "sym": "Hf", "name": "Háfnio", "cat": "transicao", "period": 6, "group": 4, "mass": 178.49, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d²", "shells": [2, 8, 18, 32, 10, 2], "valence_count": 2, "valence_letter": "P", "radius": 175}, {"z": 73, "sym": "Ta", "name": "Tântalo", "cat": "transicao", "period": 6, "group": 5, "mass": 180.948, "en": 1.5, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d³", "shells": [2, 8, 18, 32, 11, 2], "valence_count": 2, "valence_letter": "P", "radius": 170}, {"z": 74, "sym": "W", "name": "Tungstênio", "cat": "transicao", "period": 6, "group": 6, "mass": 183.84, "en": 2.36, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁴", "shells": [2, 8, 18, 32, 12, 2], "valence_count": 2, "valence_letter": "P", "radius": 162}, {"z": 75, "sym": "Re", "name": "Rênio", "cat": "transicao", "period": 6, "group": 7, "mass": 186.207, "en": 1.9, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁵", "shells": [2, 8, 18, 32, 13, 2], "valence_count": 2, "valence_letter": "P", "radius": 151}, {"z": 76, "sym": "Os", "name": "Ósmio", "cat": "transicao", "period": 6, "group": 8, "mass": 190.23, "en": 2.2, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁶", "shells": [2, 8, 18, 32, 14, 2], "valence_count": 2, "valence_letter": "P", "radius": 144}, {"z": 77, "sym": "Ir", "name": "Irídio", "cat": "transicao", "period": 6, "group": 9, "mass": 192.217, "en": 2.2, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁷", "shells": [2, 8, 18, 32, 15, 2], "valence_count": 2, "valence_letter": "P", "radius": 141}, {"z": 78, "sym": "Pt", "name": "Platina", "cat": "transicao", "period": 6, "group": 10, "mass": 195.084, "en": 2.28, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁸", "shells": [2, 8, 18, 32, 16, 2], "valence_count": 2, "valence_letter": "P", "radius": 136}, {"z": 79, "sym": "Au", "name": "Ouro", "cat": "transicao", "period": 6, "group": 11, "mass": 196.967, "en": 2.54, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁹", "shells": [2, 8, 18, 32, 17, 2], "valence_count": 2, "valence_letter": "P", "radius": 136}, {"z": 80, "sym": "Hg", "name": "Mercúrio", "cat": "transicao", "period": 6, "group": 12, "mass": 200.592, "en": 2.0, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰", "shells": [2, 8, 18, 32, 18, 2], "valence_count": 2, "valence_letter": "P", "radius": 132}, {"z": 81, "sym": "Tl", "name": "Tálio", "cat": "pos-transicao", "period": 6, "group": 13, "mass": 204.38, "en": 1.62, "val": "3", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p¹", "shells": [2, 8, 18, 32, 18, 3], "valence_count": 3, "valence_letter": "P", "radius": 145}, {"z": 82, "sym": "Pb", "name": "Chumbo", "cat": "pos-transicao", "period": 6, "group": 14, "mass": 207.2, "en": 2.33, "val": "4", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p²", "shells": [2, 8, 18, 32, 18, 4], "valence_count": 4, "valence_letter": "P", "radius": 146}, {"z": 83, "sym": "Bi", "name": "Bismuto", "cat": "pos-transicao", "period": 6, "group": 15, "mass": 208.98, "en": 2.02, "val": "5", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p³", "shells": [2, 8, 18, 32, 18, 5], "valence_count": 5, "valence_letter": "P", "radius": 148}, {"z": 84, "sym": "Po", "name": "Polônio", "cat": "pos-transicao", "period": 6, "group": 16, "mass": 209, "en": 2.0, "val": "6", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁴", "shells": [2, 8, 18, 32, 18, 6], "valence_count": 6, "valence_letter": "P", "radius": 140}, {"z": 85, "sym": "At", "name": "Astato", "cat": "halogenio", "period": 6, "group": 17, "mass": 210, "en": 2.2, "val": "7", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁵", "shells": [2, 8, 18, 32, 18, 7], "valence_count": 7, "valence_letter": "P", "radius": 150}, {"z": 86, "sym": "Rn", "name": "Radônio", "cat": "gas-nobre", "period": 6, "group": 18, "mass": 222, "en": null, "val": "8", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶", "shells": [2, 8, 18, 32, 18, 8], "valence_count": 8, "valence_letter": "P", "radius": 150}, {"z": 87, "sym": "Fr", "name": "Frâncio", "cat": "alcalino", "period": 7, "group": 1, "mass": 223, "en": 0.7, "val": "1", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s¹", "shells": [2, 8, 18, 32, 18, 8, 1], "valence_count": 1, "valence_letter": "Q", "radius": 260}, {"z": 88, "sym": "Ra", "name": "Rádio", "cat": "alcalino-terroso", "period": 7, "group": 2, "mass": 226, "en": 0.9, "val": "2", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s²", "shells": [2, 8, 18, 32, 18, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 221}, {"z": 89, "sym": "Ac", "name": "Actínio", "cat": "actinideo", "period": 7, "group": 0, "mass": 227, "en": 1.1, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹", "shells": [2, 8, 18, 32, 19, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 215}, {"z": 90, "sym": "Th", "name": "Tório", "cat": "actinideo", "period": 7, "group": 0, "mass": 232.038, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f²", "shells": [2, 8, 18, 32, 20, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 206}, {"z": 91, "sym": "Pa", "name": "Protactínio", "cat": "actinideo", "period": 7, "group": 0, "mass": 231.036, "en": 1.5, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f³", "shells": [2, 8, 18, 32, 21, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 200}, {"z": 92, "sym": "U", "name": "Urânio", "cat": "actinideo", "period": 7, "group": 0, "mass": 238.029, "en": 1.38, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁴", "shells": [2, 8, 18, 32, 22, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 196}, {"z": 93, "sym": "Np", "name": "Netúnio", "cat": "actinideo", "period": 7, "group": 0, "mass": 237, "en": 1.36, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁵", "shells": [2, 8, 18, 32, 23, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 190}, {"z": 94, "sym": "Pu", "name": "Plutônio", "cat": "actinideo", "period": 7, "group": 0, "mass": 244, "en": 1.28, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁶", "shells": [2, 8, 18, 32, 24, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 187}, {"z": 95, "sym": "Am", "name": "Amerício", "cat": "actinideo", "period": 7, "group": 0, "mass": 243, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁷", "shells": [2, 8, 18, 32, 25, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 180}, {"z": 96, "sym": "Cm", "name": "Cúrio", "cat": "actinideo", "period": 7, "group": 0, "mass": 247, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁸", "shells": [2, 8, 18, 32, 26, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 169}, {"z": 97, "sym": "Bk", "name": "Berquélio", "cat": "actinideo", "period": 7, "group": 0, "mass": 247, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁹", "shells": [2, 8, 18, 32, 27, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 168}, {"z": 98, "sym": "Cf", "name": "Califórnio", "cat": "actinideo", "period": 7, "group": 0, "mass": 251, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁰", "shells": [2, 8, 18, 32, 28, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 168}, {"z": 99, "sym": "Es", "name": "Einstênio", "cat": "actinideo", "period": 7, "group": 0, "mass": 252, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹¹", "shells": [2, 8, 18, 32, 29, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 165}, {"z": 100, "sym": "Fm", "name": "Férmio", "cat": "actinideo", "period": 7, "group": 0, "mass": 257, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹²", "shells": [2, 8, 18, 32, 30, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 167}, {"z": 101, "sym": "Md", "name": "Mendelévio", "cat": "actinideo", "period": 7, "group": 0, "mass": 258, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹³", "shells": [2, 8, 18, 32, 31, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 173}, {"z": 102, "sym": "No", "name": "Nobélio", "cat": "actinideo", "period": 7, "group": 0, "mass": 259, "en": 1.3, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴", "shells": [2, 8, 18, 32, 32, 8, 2], "valence_count": 2, "valence_letter": "Q", "radius": 176}, {"z": 103, "sym": "Lr", "name": "Laurêncio", "cat": "actinideo", "period": 7, "group": 0, "mass": 266, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹", "shells": [2, 8, 18, 32, 32, 9, 2], "valence_count": 2, "valence_letter": "Q", "radius": 161}, {"z": 104, "sym": "Rf", "name": "Rutherfórdio", "cat": "transicao", "period": 7, "group": 4, "mass": 267, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d²", "shells": [2, 8, 18, 32, 32, 10, 2], "valence_count": 2, "valence_letter": "Q", "radius": 157}, {"z": 105, "sym": "Db", "name": "Dúbnio", "cat": "transicao", "period": 7, "group": 5, "mass": 268, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d³", "shells": [2, 8, 18, 32, 32, 11, 2], "valence_count": 2, "valence_letter": "Q", "radius": 149}, {"z": 106, "sym": "Sg", "name": "Seabórgio", "cat": "transicao", "period": 7, "group": 6, "mass": 269, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁴", "shells": [2, 8, 18, 32, 32, 12, 2], "valence_count": 2, "valence_letter": "Q", "radius": 143}, {"z": 107, "sym": "Bh", "name": "Bóhrio", "cat": "transicao", "period": 7, "group": 7, "mass": 270, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁵", "shells": [2, 8, 18, 32, 32, 13, 2], "valence_count": 2, "valence_letter": "Q", "radius": 141}, {"z": 108, "sym": "Hs", "name": "Hássio", "cat": "transicao", "period": 7, "group": 8, "mass": 269, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁶", "shells": [2, 8, 18, 32, 32, 14, 2], "valence_count": 2, "valence_letter": "Q", "radius": 134}, {"z": 109, "sym": "Mt", "name": "Meitnério", "cat": "transicao", "period": 7, "group": 9, "mass": 278, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁷", "shells": [2, 8, 18, 32, 32, 15, 2], "valence_count": 2, "valence_letter": "Q", "radius": 129}, {"z": 110, "sym": "Ds", "name": "Darmstádtio", "cat": "transicao", "period": 7, "group": 10, "mass": 281, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁸", "shells": [2, 8, 18, 32, 32, 16, 2], "valence_count": 2, "valence_letter": "Q", "radius": 128}, {"z": 111, "sym": "Rg", "name": "Roentgênio", "cat": "transicao", "period": 7, "group": 11, "mass": 282, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d⁹", "shells": [2, 8, 18, 32, 32, 17, 2], "valence_count": 2, "valence_letter": "Q", "radius": 121}, {"z": 112, "sym": "Cn", "name": "Copernício", "cat": "transicao", "period": 7, "group": 12, "mass": 285, "en": null, "val": "variável", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰", "shells": [2, 8, 18, 32, 32, 18, 2], "valence_count": 2, "valence_letter": "Q", "radius": 122}, {"z": 113, "sym": "Nh", "name": "Nihônio", "cat": "pos-transicao", "period": 7, "group": 13, "mass": 286, "en": null, "val": "3", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p¹", "shells": [2, 8, 18, 32, 32, 18, 3], "valence_count": 3, "valence_letter": "Q", "radius": 136}, {"z": 114, "sym": "Fl", "name": "Fleróvio", "cat": "pos-transicao", "period": 7, "group": 14, "mass": 289, "en": null, "val": "4", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p²", "shells": [2, 8, 18, 32, 32, 18, 4], "valence_count": 4, "valence_letter": "Q", "radius": 143}, {"z": 115, "sym": "Mc", "name": "Moscóvio", "cat": "pos-transicao", "period": 7, "group": 15, "mass": 290, "en": null, "val": "5", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p³", "shells": [2, 8, 18, 32, 32, 18, 5], "valence_count": 5, "valence_letter": "Q", "radius": 162}, {"z": 116, "sym": "Lv", "name": "Livermório", "cat": "pos-transicao", "period": 7, "group": 16, "mass": 293, "en": null, "val": "6", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁴", "shells": [2, 8, 18, 32, 32, 18, 6], "valence_count": 6, "valence_letter": "Q", "radius": 175}, {"z": 117, "sym": "Ts", "name": "Tenessino", "cat": "halogenio", "period": 7, "group": 17, "mass": 294, "en": null, "val": "7", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁵", "shells": [2, 8, 18, 32, 32, 18, 7], "valence_count": 7, "valence_letter": "Q", "radius": 165}, {"z": 118, "sym": "Og", "name": "Oganessônio", "cat": "gas-nobre", "period": 7, "group": 18, "mass": 294, "en": null, "val": "8", "config": "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁶", "shells": [2, 8, 18, 32, 32, 18, 8], "valence_count": 8, "valence_letter": "Q", "radius": 157}];
+
+const INFO = {"1": {"h": "Identificado por Henry Cavendish em 1766 como \"ar inflamável\". Lavoisier o batizou de hidrogênio (\"gerador de água\") em 1783. É o elemento mais abundante do universo.", "m": "A ressonância magnética forma imagens a partir do sinal dos núcleos de hidrogênio da água do corpo. O hidrogênio também está presente em praticamente todas as moléculas dos medicamentos.", "b": "Gradientes de íons H⁺ movem a ATP sintase na respiração celular e na fotossíntese. As pontes de hidrogênio mantêm unidas as duas fitas do DNA e dão forma às proteínas.", "i": "Produção de amônia (processo Haber-Bosch), refino de petróleo e combustível em células a combustível e foguetes."}, "2": {"h": "Detectado em 1868 no espectro do Sol, daí o nome (helios, Sol). Só foi encontrado na Terra em 1895, por William Ramsay.", "m": "Resfria os ímãs supercondutores dos aparelhos de ressonância magnética. A mistura de hélio e oxigênio (heliox) facilita a respiração em vias aéreas obstruídas.", "b": "É inerte e não participa de reações biológicas.", "i": "Balões e dirigíveis, misturas de gás para mergulho profundo, soldagem com atmosfera protegida e criogenia."}, "3": {"h": "Descoberto em 1817 por Johan August Arfwedson em um mineral (petalita). O nome vem de lithos, \"pedra\".", "m": "O carbonato de lítio é um estabilizador de humor usado no tratamento do transtorno bipolar, desde os estudos de John Cade, em 1949.", "i": "Baterias recarregáveis de íon-lítio (celulares, notebooks, carros elétricos). O Vale do Jequitinhonha, em Minas Gerais, tem jazidas de lítio em exploração."}, "4": {"h": "Descoberto em 1798 por Louis-Nicolas Vauquelin no berilo e na esmeralda. O nome vem de beryllos, o mineral berilo.", "m": "Janelas de berílio em tubos de raios X deixam a radiação passar com pouca perda.", "b": "É tóxico: a poeira inalada pode causar uma doença pulmonar crônica, a berilose.", "i": "Ligas leves e rígidas para a indústria aeroespacial. Esmeralda e água-marinha são variedades de berilo, coloridas por impurezas."}, "5": {"h": "Isolado de forma impura em 1808 por Gay-Lussac e Thénard, e por Humphry Davy. O bórax já era usado desde a Antiguidade.", "m": "O ácido bórico é um antisséptico fraco, presente em alguns colírios e soluções de lavagem.", "b": "É um micronutriente essencial para as plantas. Sua falta prejudica o crescimento de brotos e raízes.", "i": "Vidro borossilicato (tipo Pyrex), fibras de vidro, detergentes e fertilizantes."}, "6": {"h": "Conhecido desde a Antiguidade como carvão, grafite e diamante. Lavoisier o reconheceu como elemento em 1789.", "m": "O carbono-11 é usado em exames de PET scan. O carbono-14 serve como traçador em pesquisas.", "b": "Base da química da vida: açúcares, proteínas, lipídios e ácidos nucleicos. Circula pelo ciclo do carbono, da fotossíntese à respiração.", "i": "Aço (liga de ferro e carbono), combustíveis, grafite de lápis, fibra de carbono, diamante industrial e joias."}, "7": {"h": "Isolado em 1772 por Daniel Rutherford, que o chamou de \"ar nocivo\". O nome nitrogênio (\"gerador de salitre\") veio depois.", "m": "O óxido nitroso é usado como anestésico. A nitroglicerina dilata vasos no tratamento da angina. O óxido nítrico (NO) regula a dilatação dos vasos, descoberta premiada com o Nobel de 1998.", "b": "Está nos aminoácidos, nas proteínas e nas bases do DNA e do RNA. Bactérias das raízes de leguminosas fixam o N₂ do ar em formas que as plantas aproveitam.", "i": "Fertilizantes (amônia e ureia), explosivos e nitrogênio líquido para congelar alimentos e amostras. Compõe cerca de 78% do ar."}, "8": {"h": "Isolado de forma independente por Scheele (c. 1771) e Priestley (1774). Lavoisier o nomeou e explicou a combustão com ele.", "m": "Oxigenoterapia, ventilação mecânica e oximetria de pulso, que mede a saturação de oxigênio no sangue.", "b": "É o aceptor final de elétrons na respiração aeróbica e é liberado na fotossíntese. O ozônio (O₃) filtra parte da radiação ultravioleta do Sol.", "i": "Siderurgia, solda oxiacetilênica, tratamento de esgoto e oxidante em foguetes."}, "9": {"h": "Isolado em 1886 por Henri Moissan, após décadas de tentativas perigosas, o que lhe rendeu o Nobel de 1906. O nome vem da fluorita.", "m": "Fluoretos fortalecem o esmalte dos dentes (cremes dentais e água fluoretada). O flúor-18 é usado no PET scan.", "b": "Em excesso causa fluorose, manchas no esmalte do dente. É o elemento mais eletronegativo da tabela.", "i": "Teflon (PTFE), gases refrigerantes e o hexafluoreto de urânio, usado no enriquecimento de urânio."}, "10": {"h": "Descoberto em 1898 por Ramsay e Travers, no ar líquido. O nome vem de neos, \"novo\".", "i": "Letreiros luminosos de cor vermelho-alaranjada, lasers e criogenia. Gás inerte, não forma compostos comuns."}, "11": {"h": "Isolado em 1807 por Humphry Davy, por eletrólise da soda cáustica. O símbolo Na vem de natrium.", "m": "O soro fisiológico é uma solução de NaCl a 0,9%. Desequilíbrios de sódio no sangue (hiponatremia e hipernatremia) são tratados em hospitais.", "b": "A bomba de sódio e potássio gera o impulso nervoso e controla o equilíbrio de água nas células.", "i": "Sal de cozinha, soda cáustica, vidro e lâmpadas de vapor de sódio (luz amarela)."}, "12": {"h": "Isolado por Davy em 1808. O nome vem de Magnésia, região da Grécia.", "m": "O leite de magnésia é antiácido e laxante. O sulfato de magnésio é usado na prevenção de convulsões na pré-eclâmpsia.", "b": "É o átomo central da clorofila e cofator de enzimas que usam ATP.", "i": "Ligas leves para carros e aviões, fogos de artifício e flashes antigos (luz branca intensa)."}, "13": {"h": "Isolado em 1825 por Hans Christian Ørsted. Já foi mais valioso que o ouro, até o processo Hall-Héroult (1886) torná-lo barato.", "m": "O hidróxido de alumínio é usado como antiácido. Sais de alumínio atuam como adjuvantes em várias vacinas.", "i": "Latas, embalagens, aviões e esquadrias. Reciclar alumínio economiza cerca de 95% da energia de produzi-lo a partir do minério (bauxita)."}, "14": {"h": "Isolado em 1824 por Berzelius. O nome vem do latim silex, \"pedra dura\".", "m": "Os silicones, compostos de silício, são usados em próteses e implantes.", "b": "Gramíneas e diatomáceas acumulam sílica nos tecidos e nas carapaças.", "i": "Chips de computador, células solares, vidro e cimento. A areia é feita principalmente de SiO₂."}, "15": {"h": "Isolado em 1669 pelo alquimista Hennig Brand, a partir de urina. O nome significa \"portador de luz\", por brilhar no escuro.", "m": "O fosfato de cálcio forma ossos e dentes. Bifosfonatos são medicamentos usados contra a osteoporose.", "b": "Está no esqueleto do DNA e do RNA, no ATP e nos fosfolipídios das membranas celulares.", "i": "Fertilizantes (o P do NPK), palitos de fósforo e aditivos de alimentos."}, "16": {"h": "Conhecido desde a Antiguidade como \"pedra de enxofre\". Lavoisier o reconheceu como elemento.", "m": "As sulfonamidas, derivadas do enxofre, foram os primeiros antibióticos sintéticos, nos anos 1930.", "b": "Está nos aminoácidos cisteína e metionina. Pontes dissulfeto estabilizam proteínas, como a queratina do cabelo.", "i": "Ácido sulfúrico (o produto químico mais fabricado do mundo), vulcanização da borracha e pólvora."}, "17": {"h": "Isolado em 1774 por Scheele. Davy o reconheceu como elemento em 1810 e o chamou de chloros, \"verde-amarelado\".", "m": "Desinfetantes e antissépticos à base de cloro. O sal comum (NaCl) compõe o soro fisiológico.", "b": "O ácido clorídrico do suco gástrico digere alimentos e mata microrganismos. O íon cloreto equilibra cargas nas células.", "i": "Tratamento de água (cloração), PVC e alvejantes."}, "18": {"h": "Descoberto em 1894 por Rayleigh e Ramsay. O nome significa \"preguiçoso\" (argos), por ser inerte. Forma cerca de 0,93% do ar.", "m": "A coagulação por plasma de argônio é uma técnica usada em endoscopia e cirurgia para estancar sangramentos.", "i": "Atmosfera protegida na soldagem, lâmpadas incandescentes e conservação de documentos e vinhos."}, "19": {"h": "Isolado em 1807 por Humphry Davy, a partir da potassa (cinzas de plantas). O símbolo K vem de kalium.", "m": "Níveis anormais de potássio no sangue alteram o ritmo do coração.", "b": "Gera o potencial de membrana e o impulso nervoso junto com o sódio. É um dos três nutrientes principais das plantas (o K do NPK). A banana é fonte de potássio e contém uma fração natural de K-40, radioativo.", "i": "Fertilizantes, sabões e fogos de artifício."}, "20": {"h": "Isolado por Davy em 1808. O nome vem do latim calx, \"cal\".", "m": "Suplementos de cálcio e vitamina D previnem a osteoporose. O gesso ortopédico é feito de sulfato de cálcio.", "b": "Forma ossos, dentes e conchas (hidroxiapatita e carbonato). Participa da contração muscular, da coagulação do sangue e da sinalização das células.", "i": "Cal, cimento, giz, calcário e mármore."}, "21": {"h": "Previsto por Mendeleev como \"eka-boro\" e descoberto em 1879 por Lars Nilson. O nome vem da Escandinávia.", "i": "Ligas de alumínio e escândio para aviões, bicicletas e equipamentos esportivos, e lâmpadas de alta intensidade."}, "22": {"h": "Descoberto em 1791 por William Gregor. Klaproth lhe deu o nome dos Titãs da mitologia grega em 1795.", "m": "Implantes dentários e ortopédicos de titânio se integram ao osso (osseointegração) e são bem tolerados pelo corpo.", "i": "Aviões, próteses, joias e pigmento branco (TiO₂) em tintas, alimentos e protetores solares."}, "23": {"h": "Descoberto por Andrés Manuel del Río em 1801, no México, e redescoberto por Sefström em 1830. O nome vem de Vanadis, deusa nórdica.", "b": "Ascídias (animais marinhos) concentram vanádio no sangue.", "i": "Aços de ferramentas, resistentes e duros, e baterias de fluxo de vanádio para armazenar energia."}, "24": {"h": "Descoberto em 1797 por Vauquelin. O nome vem de chroma, \"cor\", pela variedade de cores dos compostos.", "b": "O cromo trivalente é um micronutriente ligado ao metabolismo da glicose. O cromo hexavalente é tóxico e cancerígeno.", "i": "Cromagem, aço inoxidável (com pelo menos 10,5% de cromo) e pigmentos. A cor vermelha do rubi vem de Cr³⁺."}, "25": {"h": "Isolado em 1774 por Johan Gahn. O nome vem do mineral pirolusita, chamado magnes.", "m": "A inalação prolongada de poeira de manganês pode causar manganismo, com sintomas parecidos com os do Parkinson.", "b": "Faz parte de enzimas antioxidantes e do complexo que quebra a água na fotossíntese.", "i": "Aço (remove impurezas e endurece) e pilhas alcalinas."}, "26": {"h": "Usado desde a Idade do Ferro (c. 1200 a.C.). O símbolo vem de ferrum. Minas Gerais deve seu nome e sua história também aos minérios do Quadrilátero Ferrífero.", "m": "A anemia ferropriva, falta de ferro, é a deficiência nutricional mais comum do mundo e é tratada com suplementos.", "b": "Está na hemoglobina, que leva O₂ no sangue, e nos citocromos da respiração celular.", "i": "Aço, construção civil, automóveis e máquinas."}, "27": {"h": "Isolado por Georg Brandt por volta de 1735. O nome vem do alemão Kobold, \"duende\" dos mineiros.", "m": "O cobalto-60 foi muito usado em radioterapia. A falta de vitamina B12, que contém cobalto, causa anemia.", "b": "É o átomo central da vitamina B12 (cobalamina).", "i": "Baterias de íon-lítio, ligas resistentes e o pigmento azul-cobalto em vidros e cerâmicas."}, "28": {"h": "Isolado em 1751 por Axel Cronstedt. O nome vem do alemão Kupfernickel, \"falso cobre\".", "m": "A alergia ao níquel (dermatite de contato) é comum em bijuterias. Fios ortodônticos e stents de nitinol (níquel e titânio) voltam à forma original com o calor do corpo.", "i": "Aço inoxidável, moedas, baterias recarregáveis e catalisador para hidrogenar óleos vegetais."}, "29": {"h": "Um dos primeiros metais usados pelos humanos (Idade do Cobre). O nome vem de Cyprium, Chipre.", "m": "Superfícies de cobre matam bactérias e são estudadas em hospitais. Existe DIU de cobre como método contraceptivo.", "b": "É cofator de enzimas da respiração celular. O sangue de polvos e caranguejos é azulado por causa do cobre da hemocianina.", "i": "Fios elétricos, tubulações, moedas e ligas como bronze e latão."}, "30": {"h": "Usado em ligas de latão desde a Antiguidade. Marggraf descreveu o metal puro na Europa em 1746.", "m": "Suplementos de zinco ajudam a imunidade e a cicatrização. Pomadas de óxido de zinco tratam assaduras.", "b": "É cofator de centenas de enzimas e forma os \"dedos de zinco\", proteínas que se ligam ao DNA.", "i": "Galvanização do aço contra a ferrugem, pilhas, latão e protetores solares."}, "31": {"h": "Previsto por Mendeleev como \"eka-alumínio\" e descoberto em 1875 por Lecoq de Boisbaudran. Derrete a 29,8 °C, quase na palma da mão.", "m": "O gálio-68 e o gálio-67 são usados em exames de imagem de medicina nuclear.", "i": "LEDs (nitreto de gálio), semicondutores (arseneto de gálio) e células solares."}, "32": {"h": "Previsto por Mendeleev como \"eka-silício\" e descoberto em 1886 por Clemens Winkler. O nome homenageia a Alemanha.", "i": "Foi usado nos primeiros transistores (1947). Hoje serve em fibras ópticas e lentes de infravermelho."}, "33": {"h": "Conhecido desde a Antiguidade como veneno. Alberto Magno o isolou no século XIII.", "m": "O trióxido de arsênio trata a leucemia promielocítica aguda. O Salvarsan (Ehrlich, 1910) foi um dos primeiros remédios contra a sífilis.", "b": "É tóxico. A contaminação da água de poços por arsênio natural afeta milhões de pessoas em algumas regiões.", "i": "Semicondutores (arseneto de gálio). Usos antigos em pesticidas e preservativos de madeira foram em grande parte abandonados."}, "34": {"h": "Descoberto em 1817 por Berzelius. O nome vem de Selene, a Lua.", "m": "A falta de selênio está associada à doença de Keshan, uma cardiomiopatia.", "b": "É essencial em pequena quantidade. Está na selenocisteína, o 21º aminoácido, e em enzimas antioxidantes. A castanha-do-pará é uma fonte muito rica.", "i": "Células fotovoltaicas, vidro (cor vermelha) e xampus anticaspa."}, "35": {"h": "Descoberto em 1826 por Antoine Balard. O nome vem de bromos, \"mau cheiro\". É líquido à temperatura ambiente.", "m": "Brometos já foram usados como sedativos e anticonvulsivantes.", "i": "Retardantes de chama, desinfecção de piscinas e tinturas."}, "36": {"h": "Descoberto em 1898 por Ramsay e Travers. O nome vem de kryptos, \"oculto\". Entre 1960 e 1983 o metro foi definido por uma luz emitida pelo criptônio-86.", "i": "Lâmpadas e flashes fotográficos de alta velocidade e lasers."}, "37": {"h": "Descoberto em 1861 por Bunsen e Kirchhoff, pelas linhas vermelhas no espectro (rubidus, \"vermelho\").", "m": "O rubídio-82 é usado em PET scan para avaliar o fluxo de sangue no coração.", "i": "Relógios atômicos e pesquisas com gases ultrafrios."}, "38": {"h": "Identificado em 1790 em minério de Strontian, na Escócia, e isolado por Davy em 1808.", "m": "O estrôncio-89 alivia a dor de metástases ósseas. O ranelato de estrôncio já foi usado contra osteoporose.", "i": "Fogos de artifício de cor vermelho-carmim e sinalizadores."}, "39": {"h": "Nome da vila sueca de Ytterby, onde minerais deram origem a quatro elementos (Y, Yb, Tb, Er). Gadolin identificou o óxido em 1794.", "m": "O ítrio-90 é usado na radioembolização de tumores do fígado.", "i": "Lasers Nd:YAG, LEDs brancos e fósforos de telas."}, "40": {"h": "Descoberto por Klaproth em 1789 no mineral zircão e isolado por Berzelius em 1824.", "m": "Coroas e próteses dentárias de zircônia (óxido de zircônio) são muito resistentes.", "i": "Revestimento de combustível em reatores nucleares, porque absorve poucos nêutrons, e cerâmicas."}, "41": {"h": "Descoberto em 1801 por Charles Hatchett. O nome homenageia Níobe, figura da mitologia grega.", "i": "O Brasil produz a maior parte do nióbio do mundo, a partir de Araxá (MG). Entra em aços de alta resistência e em ímãs supercondutores."}, "42": {"h": "Isolado em 1781 por Peter Hjelm. O nome vem de molybdos, \"chumbo\", por ser confundido com ele.", "m": "O molibdênio-99 gera o tecnécio-99m, o radioisótopo mais usado em exames de medicina nuclear.", "b": "É cofator da nitrogenase, enzima que fixa o nitrogênio do ar, e de outras enzimas.", "i": "Aços especiais e catalisadores que removem o enxofre do petróleo."}, "43": {"h": "Primeiro elemento produzido artificialmente, em 1937, por Perrier e Segrè. O nome vem de technetos, \"artificial\".", "m": "O tecnécio-99m é o radioisótopo mais usado em medicina nuclear, em cintilografias de ossos, coração e tireoide."}, "44": {"h": "Isolado em 1844 por Karl Claus. O nome vem de Ruthenia, a Rússia.", "m": "Complexos de rutênio são pesquisados como medicamentos contra o câncer.", "i": "Contatos elétricos resistentes ao desgaste e catalisadores."}, "45": {"h": "Descoberto em 1803 por William Wollaston. O nome vem de rhodon, \"rosa\", pela cor dos sais.", "i": "Conversores catalíticos de automóveis, que reduzem óxidos de nitrogênio, e revestimento de joias. É um dos metais mais caros."}, "46": {"h": "Descoberto em 1803 por Wollaston. O nome homenageia o asteroide Palas.", "m": "Sementes de paládio-103 são usadas na braquiterapia do câncer de próstata.", "i": "Conversores catalíticos, eletrônicos e reações de acoplamento da química orgânica (Nobel de 2010: Heck, Negishi e Suzuki)."}, "47": {"h": "Usada desde a Antiguidade. O símbolo vem de argentum.", "m": "A sulfadiazina de prata trata queimaduras. Íons de prata têm ação antimicrobiana.", "b": "Íons de prata são tóxicos para bactérias, por isso entram em curativos e filtros.", "i": "Joias, espelhos, fotografia analógica e eletrônicos. É o melhor condutor elétrico entre os metais."}, "48": {"h": "Descoberto em 1817 por Friedrich Stromeyer em minério de zinco (cadmia).", "b": "É tóxico e se acumula nos rins. A doença itai-itai, no Japão, foi causada por contaminação de arroz com cádmio.", "i": "Baterias níquel-cádmio, pigmentos amarelos e vermelhos e pontos quânticos."}, "49": {"h": "Descoberto em 1863 por Reich e Richter, por uma linha de cor índigo no espectro.", "m": "O índio-111 é usado em exames de imagem de medicina nuclear.", "i": "Telas sensíveis ao toque e LCD (óxido de índio e estanho) e soldas."}, "50": {"h": "Usado desde a Idade do Bronze, em liga com o cobre. O símbolo vem de stannum.", "b": "Compostos orgânicos de estanho (tributilestanho) já foram usados em tintas de navios e são tóxicos para a vida marinha.", "i": "Latas de folha-de-flandres, solda eletrônica e bronze."}, "51": {"h": "Conhecido desde a Antiguidade, no cosmético kohl feito de estibnita. O símbolo vem de stibium.", "m": "Os antimoniais, como o antimoniato de meglumina, ainda são usados contra a leishmaniose.", "i": "Retardantes de chama, baterias de chumbo e semicondutores."}, "52": {"h": "Descoberto em 1782 por Franz-Joseph Müller. O nome vem de tellus, \"Terra\".", "b": "Quem absorve telúrio exala um forte cheiro de alho, porque o corpo o transforma em um composto volátil.", "i": "Células solares de telureto de cádmio, ligas termoelétricas e discos regraváveis."}, "53": {"h": "Descoberto em 1811 por Bernard Courtois, em cinzas de algas. O nome vem de iodes, \"violeta\", pela cor do vapor.", "m": "Antissépticos (iodopovidona) e meios de contraste radiológicos. O iodo-131 trata hipertireoidismo e câncer de tireoide.", "b": "É essencial para os hormônios da tireoide (T3 e T4). A falta causa bócio, por isso o sal de cozinha é iodado.", "i": "Sal iodado, corantes e catalisadores."}, "54": {"h": "Descoberto em 1898 por Ramsay e Travers. O nome vem de xenos, \"estranho\". Em 1962, Neil Bartlett fez o primeiro composto de um gás nobre com ele.", "m": "Já foi usado como anestésico geral. O xenônio-129 hiperpolarizado gera imagens dos pulmões por ressonância magnética.", "i": "Faróis de carros (lâmpadas de xenônio) e propulsão iônica de satélites."}, "55": {"h": "Descoberto em 1860 por Bunsen e Kirchhoff, por linhas azuis no espectro (caesius, \"azul-celeste\"). Em 1987, um aparelho de radioterapia abandonado com césio-137 causou o acidente radiológico de Goiânia.", "m": "O césio-137 foi usado em fontes de radioterapia. O acidente de Goiânia mostrou o risco do descarte incorreto de fontes radioativas.", "i": "Relógios atômicos de césio definem o segundo desde 1967: são 9.192.631.770 oscilações da radiação do césio-133."}, "56": {"h": "Descoberto em 1808 por Davy. O nome vem de barys, \"pesado\", do mineral barita.", "m": "O sulfato de bário, insolúvel e por isso seguro, é o contraste usado em radiografias do aparelho digestivo. Sais de bário solúveis são tóxicos.", "i": "Fogos de artifício de cor verde e fluidos de perfuração de petróleo."}, "57": {"h": "Descoberto em 1839 por Carl Mosander. O nome vem de lanthanein, \"estar escondido\".", "m": "O carbonato de lantânio é usado para controlar o fósforo em pacientes com doença renal.", "i": "Lentes de câmeras e baterias recarregáveis NiMH."}, "58": {"h": "Descoberto em 1803 por Berzelius e Hisinger. O nome homenageia o asteroide Ceres.", "i": "Catalisadores de automóveis, polimento de vidro e a liga das pedras de isqueiro (ferrocério)."}, "59": {"h": "Separado em 1885 por Carl Auer von Welsbach, junto com o neodímio, de uma mistura chamada didímio.", "i": "Vidros e cerâmicas amarelo-esverdeados, ímãs e ligas para motores de aviões."}, "60": {"h": "Separado em 1885 por Welsbach, junto com o praseodímio.", "m": "O laser Nd:YAG é usado em cirurgias e em dermatologia.", "i": "Ímãs de neodímio, os mais fortes disponíveis comercialmente, em fones de ouvido, carros elétricos e turbinas eólicas."}, "61": {"h": "Identificado em 1945 em Oak Ridge (EUA), em produtos de fissão. O nome vem de Prometeu. Todos os isótopos são radioativos.", "i": "Já foi usado em tintas luminosas e baterias nucleares pequenas."}, "62": {"h": "Descoberto em 1879 por Lecoq de Boisbaudran, no mineral samarskita.", "m": "O samário-153 é usado para aliviar a dor de metástases ósseas.", "i": "Ímãs de samário e cobalto, resistentes ao calor."}, "63": {"h": "Descoberto em 1901 por Eugène Demarçay. O nome homenageia a Europa.", "i": "Fósforos vermelhos e azuis de telas e lâmpadas fluorescentes. As cédulas de euro têm tintas fluorescentes com európio contra falsificação."}, "64": {"h": "Nome em homenagem ao químico Johan Gadolin. Descoberto por Marignac em 1880.", "m": "Quelatos de gadolínio são agentes de contraste em ressonância magnética, porque o gadolínio é paramagnético.", "i": "Ímãs e refrigeração magnética."}, "65": {"h": "Descoberto em 1843 por Mosander. O nome vem de Ytterby, na Suécia.", "i": "Fósforo verde de telas e lâmpadas e ímãs especiais."}, "66": {"h": "Descoberto em 1886 por Lecoq de Boisbaudran. O nome vem de dysprositos, \"difícil de obter\".", "i": "Ímãs de neodímio resistentes a altas temperaturas e barras de controle de reatores."}, "67": {"h": "Descoberto em 1878 e 1879 por Delafontaine, Soret e Cleve. O nome vem de Holmia, Estocolmo.", "m": "O laser de hólmio (Ho:YAG) é usado para fragmentar cálculos renais e em cirurgia de próstata.", "i": "Ímãs e lasers."}, "68": {"h": "Descoberto em 1843 por Mosander. O nome vem de Ytterby, na Suécia.", "m": "O laser de érbio (Er:YAG) é usado em dermatologia e odontologia.", "i": "Amplificadores de fibra óptica das telecomunicações e vidros rosados."}, "69": {"h": "Descoberto em 1879 por Per Cleve. O nome vem de Thule, nome antigo da Escandinávia.", "m": "Lasers de túlio são usados em cirurgias.", "i": "Fontes portáteis de raios X."}, "70": {"h": "Descoberto em 1878 por Marignac. O nome vem de Ytterby, na Suécia.", "i": "Relógios atômicos ópticos, lasers de fibra e aços especiais."}, "71": {"h": "Descoberto em 1907, de forma independente, por Urbain e outros. O nome vem de Lutetia, Paris.", "m": "O lutécio-177 é usado em terapias com radiofármacos contra tumores neuroendócrinos e de próstata. Cristais com lutécio detectam radiação em aparelhos de PET.", "i": "Catalisadores de refino de petróleo."}, "72": {"h": "Descoberto em 1923 por Coster e Hevesy, em Copenhague. O nome vem de Hafnia, Copenhague.", "i": "Barras de controle de reatores nucleares e isolantes de chips de computador."}, "73": {"h": "Descoberto em 1802 por Anders Ekeberg. O nome vem de Tântalo, da mitologia grega.", "m": "É biocompatível e usado em implantes e clipes cirúrgicos.", "i": "Capacitores de celulares e computadores."}, "74": {"h": "Isolado em 1783 pelos irmãos Elhuyar. O símbolo W vem de wolframium.", "b": "É cofator de algumas enzimas de microrganismos que vivem em ambientes extremos.", "i": "Filamentos de lâmpadas incandescentes, pelo maior ponto de fusão entre os metais (3422 °C), e ferramentas de corte de carbeto de tungstênio."}, "75": {"h": "Foi o último elemento estável a ser descoberto, em 1925, por Noddack, Tacke e Berg. O nome vem do rio Reno.", "i": "Ligas para turbinas de aviões a jato e catalisadores de refino de petróleo."}, "76": {"h": "Descoberto em 1803 por Smithson Tennant. O nome vem de osme, \"cheiro\".", "i": "É o elemento natural mais denso (cerca de 22,6 g/cm³). Usado em pontas de canetas-tinteiro e contatos elétricos."}, "77": {"h": "Descoberto em 1803 por Tennant. O nome vem de iris, \"arco-íris\". A camada de argila com excesso de irídio no limite do Cretáceo com o Paleógeno apoia a hipótese do asteroide que extinguiu os dinossauros (Alvarez, 1980).", "m": "O irídio-192 é usado em braquiterapia.", "i": "Velas de ignição, cadinhos e ligas muito resistentes à corrosão."}, "78": {"h": "Já era trabalhada por povos pré-colombianos. Os espanhóis a chamaram de platina, \"pequena prata\".", "m": "A cisplatina e a carboplatina são quimioterápicos, descobertos nos anos 1960 por Barnett Rosenberg.", "i": "Catalisadores de automóveis, joias e eletrodos."}, "79": {"h": "Conhecido desde a Antiguidade. O símbolo vem de aurum. A corrida do ouro em Minas Gerais, no século XVIII, moldou Ouro Preto e a história do Brasil.", "m": "Sais de ouro já foram usados contra a artrite reumatoide. Nanopartículas de ouro aparecem em testes rápidos, como os de gravidez.", "i": "Joias, eletrônicos (não oxida) e reserva de valor."}, "80": {"h": "Conhecido desde a Antiguidade. O símbolo vem de hydrargyrum, \"prata líquida\". É líquido à temperatura ambiente.", "m": "Termômetros de mercúrio foram substituídos por outros mais seguros.", "b": "Acumula-se na cadeia alimentar como metilmercúrio. A doença de Minamata, no Japão, foi causada por peixes contaminados.", "i": "Lâmpadas fluorescentes. No garimpo de ouro, o mercúrio contamina rios, uma prática perigosa."}, "81": {"h": "Descoberto em 1861 por William Crookes, por uma linha verde no espectro (thallos, \"broto verde\").", "m": "O tálio-201 é usado em cintilografia do coração.", "b": "É muito tóxico e foi usado como veneno de ratos."}, "82": {"h": "Usado desde a Antiguidade, nos encanamentos romanos. O símbolo vem de plumbum.", "m": "A intoxicação por chumbo (saturnismo) prejudica o desenvolvimento neurológico das crianças. Aventais de chumbo protegem de raios X.", "b": "É tóxico e não tem função biológica. Tintas e gasolina com chumbo foram banidas por isso.", "i": "Baterias de automóveis e blindagem contra radiação."}, "83": {"h": "Conhecido desde a Idade Média, era confundido com chumbo e estanho. Claude Geoffroy o distinguiu em 1753.", "m": "O subsalicilato de bismuto trata problemas gástricos e entra no tratamento da bactéria Helicobacter pylori.", "i": "Cosméticos e ligas de baixo ponto de fusão. É praticamente estável: seu isótopo natural decai em escala maior que a idade do universo."}, "84": {"h": "Descoberto em 1898 por Marie e Pierre Curie. O nome homenageia a Polônia, país natal de Marie.", "b": "É altamente radioativo e tóxico. O polônio-210 esteve envolvido no envenenamento de Alexander Litvinenko, em 2006.", "i": "Já foi usado em eliminadores de eletricidade estática."}, "85": {"h": "Sintetizado em 1940 por Corson, MacKenzie e Segrè. O nome vem de astatos, \"instável\". É o elemento natural mais raro da crosta terrestre.", "m": "O astato-211 é estudado em terapias que usam radiação alfa direcionada contra tumores."}, "86": {"h": "Descoberto em 1900 por Friedrich Dorn, a partir do rádio. É um gás radioativo.", "b": "Acumula-se em ambientes fechados e mal ventilados, vindo do solo. É apontado como a segunda maior causa de câncer de pulmão, depois do cigarro.", "i": "Já foi usado em radioterapia. Hoje o interesse é medir e reduzir a exposição em casas e minas."}, "87": {"h": "Descoberto em 1939 por Marguerite Perey, no Instituto Curie. O nome homenageia a França. Seu isótopo mais estável dura cerca de 22 minutos.", "i": "Sem aplicações práticas. Só é usado em pesquisa."}, "88": {"h": "Descoberto em 1898 por Marie e Pierre Curie. O nome vem de radius, \"raio\".", "m": "Já foi usado em radioterapia e em tintas luminosas, o que causou doenças em trabalhadoras de relógios. Hoje o rádio-223 trata metástases ósseas do câncer de próstata.", "b": "É radioativo e se deposita nos ossos, como o cálcio."}, "89": {"h": "Descoberto em 1899 por André-Louis Debierne. O nome vem de aktinos, \"raio\".", "m": "O actínio-225 é estudado em terapia alfa direcionada contra o câncer."}, "90": {"h": "Descoberto em 1828 por Berzelius. O nome homenageia Thor, deus nórdico.", "i": "Estudado como combustível nuclear alternativo e usado antigamente em mantos de lampiões. O Brasil tem grandes reservas em areias monazíticas."}, "91": {"h": "Identificado em 1913 por Fajans e Göhring e isolado em 1917 e 1918 por Hahn e Meitner.", "i": "Sem aplicações práticas. Só é usado em pesquisa."}, "92": {"h": "Descoberto em 1789 por Klaproth. O nome homenageia o planeta Urano. Em 1896, Becquerel descobriu a radioatividade em sais de urânio.", "i": "Combustível de usinas nucleares (urânio-235) e datação de rochas. As usinas brasileiras ficam em Angra dos Reis (RJ)."}, "93": {"h": "Primeiro elemento transurânico, sintetizado em 1940 por McMillan e Abelson. O nome homenageia o planeta Netuno.", "i": "Subproduto de reatores nucleares. O netúnio-237 é usado em detectores de nêutrons."}, "94": {"h": "Sintetizado em 1940 e 1941 por Seaborg e colegas. O nome homenageia Plutão.", "i": "Armas nucleares e combustível nuclear misto. O plutônio-238 gera calor e eletricidade em sondas espaciais, como as Voyager."}, "95": {"h": "Sintetizado em 1944 por Seaborg e colegas. O nome homenageia as Américas.", "i": "O amerício-241 está nos detectores de fumaça de ionização."}, "96": {"h": "Sintetizado em 1944 por Seaborg, James e Ghiorso. O nome homenageia Marie e Pierre Curie.", "i": "Fonte de energia e de partículas alfa em equipamentos de sondas espaciais, como os espectrômetros de rovers de Marte."}, "97": {"h": "Sintetizado em 1949 em Berkeley, Califórnia, que dá nome ao elemento.", "i": "Só pesquisa. Foi usado como alvo para sintetizar elementos mais pesados, como o tenessino."}, "98": {"h": "Sintetizado em 1950 em Berkeley, na Califórnia.", "m": "O califórnio-252 foi testado em braquiterapia experimental.", "i": "Fonte compacta de nêutrons para prospecção de petróleo e análises de materiais."}, "99": {"h": "Encontrado em 1952 nos destroços do primeiro teste de bomba de hidrogênio (Ivy Mike). O nome homenageia Einstein.", "i": "Só pesquisa. Poucos microgramas já foram produzidos."}, "100": {"h": "Também encontrado nos destroços do teste Ivy Mike, em 1952. O nome homenageia Enrico Fermi.", "i": "Só pesquisa."}, "101": {"h": "Sintetizado em 1955 por Ghiorso e colegas, um átomo de cada vez. O nome homenageia Dmitri Mendeleev.", "i": "Só pesquisa."}, "102": {"h": "A descoberta foi disputada entre laboratórios da Suécia, dos EUA e da URSS, nos anos 1950 e 1960. O nome homenageia Alfred Nobel.", "i": "Só pesquisa."}, "103": {"h": "Sintetizado em 1961 em Berkeley. O nome homenageia Ernest Lawrence, inventor do cíclotron.", "i": "Só pesquisa."}, "104": {"h": "Produzido nos anos 1960 por equipes de Dubna (URSS) e Berkeley (EUA). O nome homenageia Ernest Rutherford.", "i": "Sem aplicações: existe por poucos segundos em laboratório."}, "105": {"h": "Produzido nos anos 1960 em Dubna e Berkeley. O nome vem de Dubna, cidade do Instituto Conjunto de Pesquisas Nucleares, na Rússia.", "i": "Sem aplicações: existe por poucos segundos em laboratório."}, "106": {"h": "Sintetizado em 1974. O nome homenageia Glenn Seaborg, primeiro cientista a ter um elemento batizado em vida (1997).", "i": "Sem aplicações: existe por poucos segundos em laboratório."}, "107": {"h": "Sintetizado em 1981 no centro GSI, em Darmstadt, Alemanha. O nome homenageia Niels Bohr.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "108": {"h": "Sintetizado em 1984 no GSI, em Darmstadt. O nome vem de Hassia, nome latino do estado alemão de Hesse.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "109": {"h": "Sintetizado em 1982 no GSI, em Darmstadt. O nome homenageia a física Lise Meitner.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "110": {"h": "Sintetizado em 1994 no GSI. O nome vem de Darmstadt, cidade alemã do laboratório.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "111": {"h": "Sintetizado em 1994 no GSI. O nome homenageia Wilhelm Röntgen, descobridor dos raios X.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "112": {"h": "Sintetizado em 1996 no GSI. O nome homenageia Nicolau Copérnico.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "113": {"h": "Sintetizado em 2004 no laboratório RIKEN, no Japão, primeiro elemento descoberto na Ásia. Nihon significa Japão em japonês.", "i": "Sem aplicações: foram produzidos pouquíssimos átomos."}, "114": {"h": "Sintetizado em 1998 em Dubna, na Rússia. O nome homenageia o Laboratório Flerov.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "115": {"h": "Sintetizado em 2003 em Dubna, em colaboração com os EUA. O nome homenageia a região de Moscou.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "116": {"h": "Sintetizado em 2000 em Dubna. O nome homenageia o Laboratório Nacional Lawrence Livermore, nos EUA.", "i": "Sem aplicações: existe por frações de segundo em laboratório."}, "117": {"h": "Sintetizado em 2010 em Dubna, com um alvo de berquélio produzido em Oak Ridge, no Tennessee, que dá nome ao elemento.", "i": "Sem aplicações: foram produzidos pouquíssimos átomos."}, "118": {"h": "Sintetizado em 2002 em Dubna. O nome homenageia Yuri Oganessian, outro cientista batizado em vida. É o elemento mais pesado conhecido.", "i": "Sem aplicações: foram produzidos pouquíssimos átomos, que existem por frações de segundo."}};
+
+const CATS = {
+  "alcalino": {label:"Metais alcalinos", color:"var(--c-alcalino)"},
+  "alcalino-terroso": {label:"Metais alcalino-terrosos", color:"var(--c-alcalino2)"},
+  "transicao": {label:"Metais de transição", color:"var(--c-transicao)"},
+  "pos-transicao": {label:"Metais pós-transição", color:"var(--c-pos)"},
+  "metaloide": {label:"Metaloides", color:"var(--c-metaloide)"},
+  "nao-metal": {label:"Não metais", color:"var(--c-naometal)"},
+  "halogenio": {label:"Halogênios", color:"var(--c-halogenio)"},
+  "gas-nobre": {label:"Gases nobres", color:"var(--c-gasnobre)"},
+  "lantanideo": {label:"Lantanídeos", color:"var(--c-lantanideo)"},
+  "actinideo": {label:"Actinídeos", color:"var(--c-actinideo)"},
+};
+
+function resolveVar(v){
+  const el = document.createElement('div');
+  el.style.color = v;
+  document.body.appendChild(el);
+  const c = getComputedStyle(el).color;
+  document.body.removeChild(el);
+  return c;
+}
+
+// ---------- Family legend / strip ----------
+const stripEl = document.getElementById('familyStrip');
+let activeFamily = null;
+Object.entries(CATS).forEach(([key,val])=>{
+  const chip = document.createElement('div');
+  chip.className='family-chip';
+  chip.dataset.cat = key;
+  const count = ELEMENTS.filter(e=>e.cat===key).length;
+  chip.innerHTML = `<span class="dot" style="background:${val.color}"></span><span class="txt"><b>${val.label}</b><span>${count} elementos</span></span>`;
+  chip.addEventListener('click', ()=>{
+    if(activeFamily===key){ activeFamily=null; }
+    else{ activeFamily = key; }
+    document.querySelectorAll('.family-chip').forEach(c=>c.classList.toggle('active', c.dataset.cat===activeFamily));
+    setMode('familia', true);
+  });
+  stripEl.appendChild(chip);
+});
+
+// ---------- Build grid ----------
+const gridEl = document.getElementById('grid');
+const TOTAL_ROWS = 10; // 7 periods + spacer(8) + 2 f-block rows
+
+function cellFor(el){
+  const div = document.createElement('div');
+  div.className='cell';
+  div.dataset.z = el.z;
+  div.innerHTML = `<span class="zc">${el.z}</span><span class="symc">${el.sym}</span><span class="valc"></span>`;
+  div.addEventListener('click', ()=>openDetail(el));
+  return div;
+}
+
+ELEMENTS.forEach(el=>{
+  let row, col;
+  if(el.group === 0){
+    // lanthanide/actinide rows
+    if(el.period===6){ row=9; col=(el.z-57)+3; }
+    else { row=10; col=(el.z-89)+3; }
+  } else {
+    row = el.period; col = el.group;
+  }
+  const div = cellFor(el);
+  div.style.gridRow = row;
+  div.style.gridColumn = col;
+  gridEl.appendChild(div);
+});
+
+// spacer row (row 8) - just empty, grid auto handles since no cells placed there
+
+// ghost placeholders in main table pointing to f-block
+function ghost(row, col, label){
+  const div = document.createElement('div');
+  div.className='cell ghost';
+  div.style.gridRow=row; div.style.gridColumn=col;
+  div.textContent = label;
+  gridEl.appendChild(div);
+}
+ghost(6,3,'57–71');
+ghost(7,3,'89–103');
+
+// ---------- Legend ----------
+const legendEl = document.getElementById('tableLegend');
+function renderLegend(mode){
+  legendEl.innerHTML='';
+  if(mode==='familia'){
+    Object.entries(CATS).forEach(([key,val])=>{
+      legendEl.innerHTML += `<span><i style="background:${val.color}"></i>${val.label}</span>`;
+    });
+  } else if(mode==='eletronegatividade'){
+    legendEl.innerHTML = `
+      <span><i style="background:#3a5568"></i>baixa (≈0,7)</span>
+      <span><i style="background:#3fa08a"></i>média</span>
+      <span><i style="background:#e7b450"></i>alta</span>
+      <span><i style="background:#e96a52"></i>muito alta (≈4,0)</span>
+      <span><i style="background:#26343e;background-image:repeating-linear-gradient(45deg,#26343e,#26343e 3px,#1c2830 3px,#1c2830 6px)"></i>não definida</span>
+    `;
+  } else if(mode==='raio'){
+    legendEl.innerHTML = `
+      <span><i style="background:#e96a52"></i>raio pequeno (≈28 pm)</span>
+      <span><i style="background:#e7b450"></i>médio</span>
+      <span><i style="background:#3fa08a"></i>grande</span>
+      <span><i style="background:#3a5568"></i>muito grande (≈260 pm)</span>
+    `;
+  } else if(mode==='valencia'){
+    for(let i=1;i<=8;i++){
+      legendEl.innerHTML += `<span><i style="background:${valenceColor(i)}"></i>${i} elétron${i>1?'s':''}</span>`;
+    }
+    legendEl.innerHTML += `<span><i style="background:#5B9AD6"></i>variável (transição / f)</span>`;
+  }
+}
+
+function valenceColor(n){
+  const scale = ["#3a5568","#4c7a80","#5e9c8b","#7fb679","#e7b450","#eda23f","#e96a52","#c94b3f"];
+  return scale[(n-1)%8];
+}
+
+function enColor(en){
+  if(en===null || en===undefined) return null;
+  // scale 0.7 -> 4.0
+  const t = Math.min(1, Math.max(0,(en-0.7)/(4.0-0.7)));
+  const stops = [
+    {t:0, c:[58,85,104]},
+    {t:0.35, c:[63,160,138]},
+    {t:0.65, c:[231,180,80]},
+    {t:1, c:[233,106,82]},
+  ];
+  let a=stops[0], b=stops[stops.length-1];
+  for(let i=0;i<stops.length-1;i++){
+    if(t>=stops[i].t && t<=stops[i+1].t){ a=stops[i]; b=stops[i+1]; break; }
+  }
+  const span = (b.t-a.t)||1;
+  const lt = (t-a.t)/span;
+  const c = a.c.map((v,i)=>Math.round(v+(b.c[i]-v)*lt));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+
+function radiusColor(r){
+  // pequeno (28pm) -> grande (260pm), escala invertida em relação à EN
+  const t = Math.min(1, Math.max(0,(r-28)/(260-28)));
+  const stops = [
+    {t:0, c:[233,106,82]},
+    {t:0.35, c:[231,180,80]},
+    {t:0.65, c:[63,160,138]},
+    {t:1, c:[58,85,104]},
+  ];
+  let a=stops[0], b=stops[stops.length-1];
+  for(let i=0;i<stops.length-1;i++){
+    if(t>=stops[i].t && t<=stops[i+1].t){ a=stops[i]; b=stops[i+1]; break; }
+  }
+  const span = (b.t-a.t)||1;
+  const lt = (t-a.t)/span;
+  const c = a.c.map((v,i)=>Math.round(v+(b.c[i]-v)*lt));
+  return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+
+// ---------- Mode rendering ----------
+let currentMode = 'familia';
+function setMode(mode, keep){
+  currentMode = mode;
+  document.querySelectorAll('#modeSwitch button').forEach(b=>b.classList.toggle('active', b.dataset.mode===mode));
+  renderLegend(mode);
+  document.querySelectorAll('.cell[data-z]').forEach(cellEl=>{
+    const el = ELEMENTS.find(e=>e.z==cellEl.dataset.z);
+    const valSpan = cellEl.querySelector('.valc');
+    valSpan.textContent='';
+    cellEl.classList.remove('nodata');
+    cellEl.style.opacity = 1;
+
+    if(mode==='familia'){
+      const cat = CATS[el.cat];
+      cellEl.style.background = resolveVar(cat.color);
+      cellEl.style.color = '#10161a';
+      if(activeFamily){
+        cellEl.style.opacity = (el.cat===activeFamily) ? 1 : 0.18;
+      }
+    } else if(mode==='eletronegatividade'){
+      const col = enColor(el.en);
+      if(col){ cellEl.style.background = col; cellEl.style.color='#10161a'; }
+      else { cellEl.classList.add('nodata'); cellEl.style.background=''; cellEl.style.color='#B9C4C9'; }
+    } else if(mode==='raio'){
+      cellEl.style.background = radiusColor(el.radius);
+      cellEl.style.color = '#10161a';
+      valSpan.textContent = el.radius;
+    } else if(mode==='valencia'){
+      if(el.val==='variável'){
+        cellEl.style.background = resolveVar('var(--c-transicao)');
+        cellEl.style.color = '#10161a';
+      } else {
+        cellEl.style.background = valenceColor(parseInt(el.val));
+        cellEl.style.color = '#f2f2f2';
+      }
+      valSpan.textContent = el.val==='variável' ? 'V' : el.val;
+    }
+  });
+}
+
+document.getElementById('modeSwitch').addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  if(btn.dataset.mode!=='familia'){ activeFamily=null; document.querySelectorAll('.family-chip').forEach(c=>c.classList.remove('active')); }
+  setMode(btn.dataset.mode);
+});
+
+setMode('familia');
+
+// ---------- Zoom ----------
+let cellSize = 54;
+function applyZoom(){
+  document.documentElement.style.setProperty('--cell', cellSize+'px');
+  document.getElementById('zoomLabel').textContent = cellSize+'px';
+}
+document.getElementById('zoomIn').addEventListener('click', ()=>{ cellSize=Math.min(78,cellSize+6); applyZoom(); });
+document.getElementById('zoomOut').addEventListener('click', ()=>{ cellSize=Math.max(34,cellSize-6); applyZoom(); });
+applyZoom();
+
+// ---------- Bohr diagram (SVG) ----------
+function drawBohr(svg, shells, size){
+  svg.innerHTML='';
+  const cx=size/2, cy=size/2;
+  const maxR = size/2 - 14;
+  const n = shells.length;
+  const step = n>1 ? maxR/n : maxR*0.6;
+
+  // nucleus
+  const nucleus = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  nucleus.setAttribute('cx',cx); nucleus.setAttribute('cy',cy); nucleus.setAttribute('r', 9);
+  nucleus.setAttribute('fill', resolveVar('var(--gold)'));
+  svg.appendChild(nucleus);
+
+  shells.forEach((count, idx)=>{
+    const r = step*(idx+1);
+    const isValence = idx===n-1;
+    const ring = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    ring.setAttribute('cx',cx); ring.setAttribute('cy',cy); ring.setAttribute('r',r);
+    ring.setAttribute('fill','none');
+    ring.setAttribute('stroke', isValence ? resolveVar('var(--cyan)') : 'rgba(238,237,228,0.28)');
+    ring.setAttribute('stroke-width', isValence ? 2 : 1);
+    svg.appendChild(ring);
+
+    for(let i=0;i<count;i++){
+      const ang = (2*Math.PI*i/count) - Math.PI/2;
+      const ex = cx + r*Math.cos(ang);
+      const ey = cy + r*Math.sin(ang);
+      const dot = document.createElementNS('http://www.w3.org/2000/svg','circle');
+      dot.setAttribute('cx',ex); dot.setAttribute('cy',ey); dot.setAttribute('r', isValence?4.2:3.2);
+      dot.setAttribute('fill', isValence ? resolveVar('var(--cyan)') : resolveVar('var(--chalk-dim)'));
+      svg.appendChild(dot);
+    }
+  });
+}
+
+drawBohr(document.getElementById('shellDemoSvg'), [2,8,1], 260);
+
+// ---------- Radius comparison visual ----------
+function buildRadiusGroup(title, zList){
+  const wrap = document.createElement('div');
+  wrap.className = 'radius-group';
+  const t = document.createElement('div');
+  t.className = 'rg-title';
+  t.textContent = title;
+  wrap.appendChild(t);
+  const row = document.createElement('div');
+  row.className = 'radius-row';
+  zList.forEach(z=>{
+    const el = ELEMENTS.find(e=>e.z===z);
+    const px = Math.round(el.radius * 0.7);
+    const item = document.createElement('div');
+    item.className = 'radius-item';
+    item.innerHTML = `<div class="rc" style="width:${px}px; height:${px}px; background:${resolveVar(CATS[el.cat].color)}"></div><div class="rl"><b>${el.sym}</b>${el.radius} pm</div>`;
+    row.appendChild(item);
+  });
+  wrap.appendChild(row);
+  return wrap;
+}
+const radiusCompareEl = document.getElementById('radiusCompare');
+radiusCompareEl.appendChild(buildRadiusGroup('Família 1 — metais alcalinos (descendo a família)', [3,11,19,37,55,87]));
+radiusCompareEl.appendChild(buildRadiusGroup('Período 2 (da esquerda para a direita)', [3,4,5,6,7,8,9,10]));
+
+// ---------- Detail overlay ----------
+const overlay = document.getElementById('overlay');
+const detailEl = document.getElementById('detail');
+
+function openDetail(el){
+  document.querySelectorAll('.cell.selected').forEach(c=>c.classList.remove('selected'));
+  const cellEl = document.querySelector(`.cell[data-z="${el.z}"]`);
+  if(cellEl) cellEl.classList.add('selected');
+
+  const cat = CATS[el.cat];
+  const enText = (el.en===null||el.en===undefined) ? 'Não definida (baixa reatividade)' : el.en.toFixed(2) + ' (Pauling)';
+  const shellsStr = el.shells.join(' – ');
+
+  detailEl.innerHTML = `
+    <button class="dclose" id="dclose">✕</button>
+    <div class="dhead">
+      <div class="dsym" style="background:${resolveVar(cat.color)}">${el.sym}</div>
+      <div>
+        <div class="dname">${el.name}</div>
+        <div class="dcat">${cat.label} · Z = ${el.z}</div>
+      </div>
+    </div>
+    <div class="dgrid">
+      <div class="dstat"><b>NÚMERO ATÔMICO (Z)</b><span>${el.z}</span></div>
+      <div class="dstat"><b>MASSA ATÔMICA</b><span>${el.mass}</span></div>
+      <div class="dstat"><b>PERÍODO</b><span>${el.period}</span></div>
+      <div class="dstat"><b>GRUPO / FAMÍLIA</b><span>${el.group>0? el.group : '3 (série f)'} — ${cat.label}</span></div>
+      <div class="dstat"><b>ELETRONEGATIVIDADE</b><span>${enText}</span></div>
+      <div class="dstat"><b>RAIO ATÔMICO (COVALENTE)</b><span>${el.radius} pm</span></div>
+      <div class="dstat"><b>CAMADA DE VALÊNCIA</b><span>Camada ${el.valence_letter} · ${el.valence_count} elétron(s)</span></div>
+    </div>
+    <div class="learn" id="learn"></div>
+    <div class="dconfig">${el.config}</div>
+    <div class="dbohr">
+      <svg id="detailSvg" width="200" height="200" viewBox="0 0 200 200"></svg>
+      <div class="note">
+        <b>Distribuição por camadas:</b> ${shellsStr}<br><br>
+        O anel em destaque (ciano) é a <b>camada de valência</b> — a camada mais externa, responsável pelas ligações químicas deste elemento.
+      </div>
+    </div>
+  `;
+  document.getElementById('dclose').addEventListener('click', closeDetail);
+  drawBohr(document.getElementById('detailSvg'), el.shells, 200);
+  cur = el; editing = false; renderLearn();
+  overlay.classList.add('show');
+}
+
+
+// ---------- Saiba mais: história e aplicações, com edição pelo professor ----------
+const LEARN_TABS = [["h","História"],["m","Medicina"],["b","Biologia"],["i","Indústria e cotidiano"]];
+let cur = null, learnTab = "h", editing = false, canEditNotes = false, notesDb = null, overrides = {};
+
+function learnFields(z){
+  const base = INFO[z] || {}, o = overrides[z] || {}, out = {};
+  LEARN_TABS.forEach(([k])=>{ out[k] = (typeof o[k]==='string') ? o[k] : (base[k] || ''); });
+  return out;
+}
+function mk(tag, cls, text){
+  const n = document.createElement(tag);
+  if(cls) n.className = cls;
+  if(text !== undefined) n.textContent = text;
+  return n;
+}
+
+function renderLearn(){
+  const box = document.getElementById('learn');
+  if(!box || !cur) return;
+  box.textContent = '';
+  const z = cur.z, f = learnFields(z), base = INFO[z] || {};
+
+  const head = mk('div','learn-head');
+  head.appendChild(mk('span','learn-title','SABER MAIS'));
+  if(overrides[z]) head.appendChild(mk('span','learn-badge','texto editado pelo professor'));
+  if(canEditNotes && notesDb && !editing){
+    const eb = mk('button','learn-edit','Editar texto');
+    eb.type = 'button';
+    eb.addEventListener('click', ()=>{ editing = true; renderLearn(); });
+    head.appendChild(eb);
+  }
+  box.appendChild(head);
+
+  if(!editing){
+    const avail = LEARN_TABS.filter(([k])=>f[k]);
+    if(!avail.length){ box.appendChild(mk('p','learn-empty','Ainda não há texto para este elemento.')); return; }
+    if(!avail.some(([k])=>k===learnTab)) learnTab = avail[0][0];
+    const bar = mk('div','learn-tabs');
+    bar.setAttribute('role','tablist');
+    avail.forEach(([k,label])=>{
+      const b = mk('button','learn-tab'+(k===learnTab?' on':''), label);
+      b.type = 'button';
+      b.setAttribute('role','tab');
+      b.setAttribute('aria-selected', k===learnTab ? 'true' : 'false');
+      b.addEventListener('click', ()=>{ learnTab = k; renderLearn(); });
+      bar.appendChild(b);
+    });
+    box.appendChild(bar);
+    box.appendChild(mk('p','learn-text', f[learnTab]));
+    return;
+  }
+
+  const areas = {};
+  LEARN_TABS.forEach(([k,label])=>{
+    const lab = mk('label','learn-lab', label);
+    lab.setAttribute('for','ed-'+k);
+    const ta = mk('textarea','learn-ta');
+    ta.id = 'ed-'+k; ta.rows = 3; ta.value = f[k];
+    areas[k] = ta;
+    box.appendChild(lab); box.appendChild(ta);
+  });
+  const row = mk('div','learn-actions');
+  const save = mk('button','learn-btn primary','Salvar'); save.type = 'button';
+  const cancel = mk('button','learn-btn','Cancelar'); cancel.type = 'button';
+  const msg = mk('span','learn-msg','');
+  row.appendChild(save); row.appendChild(cancel);
+
+  save.addEventListener('click', async ()=>{
+    save.disabled = true; msg.textContent = 'Salvando…';
+    const diff = {};
+    LEARN_TABS.forEach(([k])=>{ const v = areas[k].value.trim(); if(v !== (base[k]||'')) diff[k] = v; });
+    try{
+      const ref = notesDb.doc('notas/'+z);
+      if(Object.keys(diff).length === 0){ await ref.delete(); delete overrides[z]; }
+      else { await ref.set(diff); overrides[z] = diff; }
+      editing = false; renderLearn();
+    }catch(err){
+      msg.textContent = 'Não foi possível salvar. Confira se você entrou com a conta dona da página.';
+      save.disabled = false;
+    }
+  });
+  cancel.addEventListener('click', ()=>{ editing = false; renderLearn(); });
+  if(overrides[z]){
+    const rest = mk('button','learn-btn','Restaurar texto original'); rest.type = 'button';
+    rest.addEventListener('click', async ()=>{
+      rest.disabled = true; msg.textContent = 'Restaurando…';
+      try{ await notesDb.doc('notas/'+z).delete(); delete overrides[z]; editing = false; renderLearn(); }
+      catch(err){ msg.textContent = 'Não foi possível restaurar.'; rest.disabled = false; }
+    });
+    row.appendChild(rest);
+  }
+  row.appendChild(msg);
+  box.appendChild(row);
+}
+
+// Edições salvas pelo professor (opcional: sem o banco, a página mostra só o texto original)
+(async ()=>{
+  try{
+    const cl = window.claude;
+    if(!cl || !cl.use) return;
+    const user = await cl.use('user');
+    const db = await cl.use('db');
+    if(!db) return;
+    notesDb = db;
+    canEditNotes = user ? await user.canEdit() : false;
+    db.collection('notas').onSnapshot((snap)=>{
+      const next = {};
+      snap.docs.forEach(d=>{ const v = d.data(); if(v) next[d.id] = v; });
+      overrides = next;
+      if(cur && !editing && overlay.classList.contains('show')) renderLearn();
+    }, ()=>{});
+    if(cur && overlay.classList.contains('show') && !editing) renderLearn();
+  }catch(e){}
+})();
+
+function closeDetail(){ editing = false; overlay.classList.remove('show'); }
+overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeDetail(); });
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ if(editing){ editing = false; renderLearn(); } else closeDetail(); } });
+
+// ---------- Projector mode ----------
+document.getElementById('btnProjector').addEventListener('click', (e)=>{
+  document.body.classList.toggle('projector');
+  const on = document.body.classList.contains('projector');
+  e.target.textContent = on ? 'Desativar modo projetor' : 'Ativar modo projetor';
+  if(on){ cellSize = 66; applyZoom(); }
+});
+
+// ---------- Link direto para um elemento (QR codes): ...#z=8 ou ...?z=8 ----------
+function zFromUrl(){
+  const m = ((location.search||'')+'&'+(location.hash||'')).match(/[?#&]z=?(\d{1,3})(?!\d)/);
+  return m ? ELEMENTS.find(e=>e.z===Number(m[1])) : null;
+}
+function openFromUrl(){ const el = zFromUrl(); if(el) openDetail(el); }
+window.addEventListener('hashchange', openFromUrl);
+openFromUrl();
+</script>
+
+</body></html>
